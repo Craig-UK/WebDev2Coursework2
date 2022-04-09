@@ -11,6 +11,17 @@ router.get("/lunch", controller.lunchMenu);
 
 router.get("/login", controller.loginPage);
 router.post("/login", login, controller.handle_login);
+
+/*
+LOGGED IN STAFF
+*/
+router.get("/home", verify, controller.homePageLoggedIn);
+router.get("/aboutus", verify, controller.aboutPageLoggedIn);
+router.get("/dinnermenu", verify, controller.dinnerMenuLoggedIn);
+router.get("/lunchmenu", verify, controller.lunchMenuLoggedIn);
+router.get("/editdinner", verify, controller.editDinner);
+router.get("/editlunch", verify, controller.editLunch);
+router.get("/add", verify, controller.addNewDish);
 router.get("/logout", controller.logout);
 
 router.use(function(req, res) {
