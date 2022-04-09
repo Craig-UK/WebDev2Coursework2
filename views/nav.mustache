@@ -26,16 +26,16 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/lunch">Lunch Menu</a>
                     </li>
-                    {{^user}}
+                    {{^staff}}
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="/login">Login</a>
                         </li>
-                    {{/user}}
-                    {{#user}}
+                    {{/staff}}
+                    {{#staff}}
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="/logout">Logout</a>
                         </li>
-                    {{/user}}
+                    {{/staff}}
                 </ul>
             </div>
         </div>

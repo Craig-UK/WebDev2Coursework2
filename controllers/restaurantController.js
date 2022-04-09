@@ -32,3 +32,14 @@ exports.loginPage = function (req, res) {
         title: "Restaurant - Staff Login"
     });
 };
+
+exports.handle_login = function (req, res) {
+    res.render("home", {
+        title: "Restaurant - Home",
+        staff: "staff"
+    });
+};
+
+exports.logout = function (req, res) {
+    res.clearCookie("jwt").status(200).redirect("/");
+};
