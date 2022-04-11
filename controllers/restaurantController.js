@@ -2,6 +2,7 @@ const restaurantDAO = require("../models/restaurantModel");
 const userDao = require("../models/userModel.js");
 
 const db = new restaurantDAO();
+db.init();
 
 /* 
 NOT LOGGED IN STAFF
@@ -88,6 +89,21 @@ exports.loginPage = function (req, res) {
     });
 };
 
+exports.post_new_dish = function (req, res) {
+    console.log("Processing new dish.");
+    if (!req.body.name || !req.body.ingredients || !req.body.allergyInfo || !req.body.dishType || 
+        !req.body.menu || !req.body.price || !req.body.description) {
+        response.status(400).send("All fields are required.");
+        return;
+    }
+    db.addNewDish(req.body.name, req.body.ingredients, req.body.allergyInfo, req.body.dishType, req.body.menu,
+        req.body.price, req.body.description);
+    res.redirect("/home");
+}
+
+/*
+FUNCTIONS TO HANDLE LOGIN/LOGOUT FUNCTIONS
+*/
 exports.handle_login = function (req, res) {
     res.render("home", {
         title: "Restaurant - Home",

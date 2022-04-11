@@ -7,6 +7,80 @@
 <body>
     {{>nav}}
     <h1>Add New Dish</h1>
+    <div id="formContent">
+        <form method="POST" action="/add">
+            <div class="form-group">
+                <label for="name" class="col-sm-2 col-formlabel">
+                    Menu Item Name 
+                </label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Menu Item Name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="ingredients" class="col-sm-2 col-formlabel">
+                    Menu Item Ingredients
+                </label>
+                <div class="col-sm-10">
+                    <input type="ingredients" class="form-control" id="ingredients" name="ingredients" placeholder="Menu Item Ingredients">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="description" class="col-sm-2 col-formlabel">
+                    Menu Item Description 
+                </label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="description" name="description" placeholder="Menu Item Description">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="dishType" class="col-sm-2 col-formlabel">
+                    Dish Type
+                </label>
+                <select class="form-control" id="dishType">
+                    <option selected>Dish Type</option>
+                    <option>Starter</option>
+                    <option>Main Course</option>
+                    <option>Dessert</option>
+                    <option>Cold Drink</option>
+                    <option>Warm Drink</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="image" class="col-sm-2 col-formlabel">
+                    Image of Menu Item
+                </label>
+                <input type="file" class="form-control-file" id="image">
+            </div>
+            <div class="form-group">
+                <label for="menu" class="col-sm-2 col-formlabel">
+                    Dinner or Lunch Menu?
+                </label>
+                <select class="form-control" id="menu">
+                    <option selected>Dinner or Lunch Menu?</option>
+                    <option>Dinner</option>
+                    <option>Lunch</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="allergyInfo" class="col-sm-2 col-formlabel">
+                    Menu Item Allergy Information
+                </label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="allergyInfo" name="allergyInfo" placeholder="Menu Item Allergy Information">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="price" class="col-sm-2 col-formlabel">
+                    Menu Item Price
+                </label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="price" name="price" placeholder="Menu Item Price">
+                </div>
+            </div>
+            <input type="submit" class="btn btn-primary" value="Submit">
+        </form>
+    </div>
 </body>
 
 </html>
