@@ -20,15 +20,51 @@ exports.aboutPage = function (req, res) {
 };
 
 exports.dinnerMenu = function (req, res) {
-    res.render("dinnerMenu", {
-        title: "Restaurant - Dinner Menu"
-    });
+    db.getDinnerDishes()
+        .then((dishes) => {
+            res.render("dinnerMenu", {
+                title: "Restaurant - Dinner Menu",
+                dishes: dishes,
+            });
+        })
+        .catch((err) => {
+            console.log("An Error Occurred: ");
+            console.log(JSON.stringify(err));
+        });
 };
 
+exports.getSingleDish = function (req, res) {
+    let dish = req.params.name;
+    console.log("Controller");
+    db.getSingleDish(dish)
+        .then((dishes) => {
+            console.log("Processing");
+            res.render("singleDish", {
+                title: "Restaurant - Dish Details",
+                dish: "dish",
+                dishes: dishes,
+            });
+            console.log("In Single Dish in Controller.");
+            console.log("Menu Item: ", req.body.name);
+        })
+        .catch((err) => {
+            console.log("Error: ");
+            console.log(JSON.stringify(err));
+        });
+}
+
 exports.lunchMenu = function (req, res) {
-    res.render("lunchMenu", {
-        title: "Restaurant - Lunch Menu"
-    });
+    db.getLunchDishes()
+        .then((dishes) => {
+            res.render("LunchMenu", {
+                title: "Restaurant - Lunch Menu",
+                dishes: dishes,
+            });
+        })
+        .catch((err) => {
+            console.log("An Error Occurred: ");
+            console.log(JSON.stringify(err));
+        });
 };
 
 /*
@@ -49,17 +85,33 @@ exports.aboutPageLoggedIn = function (req, res) {
 };
 
 exports.dinnerMenuLoggedIn = function (req, res) {
-    res.render("dinnerMenu", {
-        title: "Restaurant - Dinner Menu",
-        staff: "staff"
-    });
+    db.getDinnerDishes()
+        .then((dishes) => {
+            res.render("dinnerMenu", {
+                title: "Restaurant - Dinner Menu",
+                dishes: dishes,
+                staff: "staff"
+            });
+        })
+        .catch((err) => {
+            console.log("An Error Occurred: ", err);
+            console.log(JSON.stringify(err));
+        });
 };
 
 exports.lunchMenuLoggedIn = function (req, res) {
-    res.render("lunchMenu", {
-        title: "Restaurant - Lunch Menu",
-        staff: "staff"
-    });
+    db.getLunchDishes()
+        .then((dishes) => {
+            res.render("LunchMenu", {
+                title: "Restaurant - Lunch Menu",
+                dishes: dishes,
+                staff: "staff"
+            });
+        })
+        .catch((err) => {
+            console.log("An Error Occurred: ");
+            console.log(JSON.stringify(err));
+        });
 };
 
 exports.editDinner = function (req, res) {
@@ -91,13 +143,13 @@ exports.loginPage = function (req, res) {
 
 exports.post_new_dish = function (req, res) {
     console.log("Processing new dish.");
-    if (!req.body.name || !req.body.ingredients || !req.body.allergyInfo || !req.body.dishType || 
-        !req.body.menu || !req.body.price || !req.body.description) {
-        response.status(400).send("All fields are required.");
+    if (!req.body.name || !req.body.ingredients || !req.body.allergyInfo || !req.body.dishType ||
+        !req.body.image || !req.body.menu || !req.body.price || !req.body.description) {
+        res.status(400).send("All fields are required.");
         return;
     }
-    db.addNewDish(req.body.name, req.body.ingredients, req.body.allergyInfo, req.body.dishType, req.body.menu,
-        req.body.price, req.body.description);
+    db.addNewDish(req.body.name, req.body.ingredients, req.body.allergyInfo, req.body.dishType, req.body.image,
+        req.body.menu, req.body.price, req.body.description);
     res.redirect("/home");
 }
 

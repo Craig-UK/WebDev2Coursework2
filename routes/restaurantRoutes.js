@@ -8,6 +8,7 @@ router.get("/", controller.homePage);
 router.get("/about", controller.aboutPage);
 router.get("/dinner", controller.dinnerMenu);
 router.get("/lunch", controller.lunchMenu);
+router.get("/dish/:_id", controller.getSingleDish);
 
 router.get("/login", controller.loginPage);
 router.post("/login", login, controller.handle_login);
@@ -22,6 +23,7 @@ router.get("/lunchmenu", verify, controller.lunchMenuLoggedIn);
 router.get("/editdinner", verify, controller.editDinner);
 router.get("/editlunch", verify, controller.editLunch);
 router.get("/add", verify, controller.addNewDish);
+router.post("/add", verify, controller.post_new_dish);
 router.get("/logout", controller.logout);
 
 router.use(function(req, res) {
