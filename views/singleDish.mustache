@@ -6,9 +6,15 @@
 
 <body>
     {{>nav}}
-    <h1>TEST</h1>
     {{#dishes}}
-        {{ingredients}}
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">{{name}}</h4>
+            <p class="card-text">
+                Ingredients: {{ingredients}}
+            </p>
+        </div>
+    </div>
     {{/dishes}}
 </body>
 

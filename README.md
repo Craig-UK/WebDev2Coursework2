@@ -16,7 +16,7 @@ node index.js
 ```
 ## Justification for changes from original development plans
 ###### Customer Login/Customer Register
-In the original development plans for the Web Application, there was a customer login and customer register
+In the original development plans for the Web Application, there was customer login and customer register
 pages. I then realised, after feedback, that these pages were unnecessary, so they are no longer being added
 to the final Web Application.
 ## Todo
@@ -25,7 +25,7 @@ to the final Web Application.
 - [x] Add the add new dish functionality
 - [x] Show dishes on the correct menus (e.g. Dinners on Dinner menu and Lunches on Lunch Menu)
 - [ ] Show dish types under the correct headings (e.g. Starters, Main Coures, etc.)
-- [ ] Add single dish page with more details of the selected dish
+- [x] Add single dish page with more details of the selected dish
 - [ ] Create the edit lunch function
 - [ ] Create the edit dinner function
 - [ ] Add delete dish function

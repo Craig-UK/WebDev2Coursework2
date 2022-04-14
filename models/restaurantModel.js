@@ -15,7 +15,6 @@ class Restaurant {
 
     init() {
         this.db.insert({
-            id: "1",
             name: "French Toast",
             ingredients: [
                 "Egg",
@@ -33,7 +32,6 @@ class Restaurant {
             description: "Delicious French Toast served with Maple Syrup"
         });
         this.db.insert({
-            id: "1",
             name: "Lasagna",
             ingredients: [
                 "Egg",
@@ -45,6 +43,23 @@ class Restaurant {
                 "Egg"
             ],
             dishType: "Starter",
+            image: "{imageURL}",
+            menu: "Dinner",
+            price: "3.50",
+            description: "Delicious French Toast served with Maple Syrup"
+        });
+        this.db.insert({
+            name: "Test",
+            ingredients: [
+                "Egg",
+                "Milk",
+                "Whole Wheat Bread"
+            ],
+            allergyInfo: [
+                "Milk",
+                "Egg"
+            ],
+            dishType: "Main Course",
             image: "{imageURL}",
             menu: "Dinner",
             price: "3.50",
@@ -96,25 +111,6 @@ class Restaurant {
         });
     }
 
-    getSingleDish(menuId) {
-        console.log("Model");
-        return new Promise((resolve, reject) => {
-            this.db.find({
-                'name': menuId
-            }, function (err, dishes) {
-                console.log("In Single Dish in Model");
-                console.log("Menu Item: ", menuId);
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(dishes);
-                console.log('getSingleDish returns: ', dishes);
-                    console.log("IT RESOLVED");
-                }
-            })
-        })
-    }
-
     addNewDish(name, ingredients, allergyInfo, dishType, image, menu, price, description) {
         var entry = {
             name: name,
@@ -135,6 +131,22 @@ class Restaurant {
             }
         });
     }
+
+    getSingleDish(menuName) {
+        return new Promise((resolve, reject) => {
+            this.db.find({
+                'name': menuName
+            }, function (err, entries) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(entries);
+                    console.log('getSingleDish returns: ', entries);
+                }
+            });
+        });
+    }
+
 }
 
 module.exports = Restaurant;

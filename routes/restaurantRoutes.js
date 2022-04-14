@@ -8,7 +8,7 @@ router.get("/", controller.homePage);
 router.get("/about", controller.aboutPage);
 router.get("/dinner", controller.dinnerMenu);
 router.get("/lunch", controller.lunchMenu);
-router.get("/dish/:_id", controller.getSingleDish);
+router.get("/dish/:name", controller.getSingleDish);
 
 router.get("/login", controller.loginPage);
 router.post("/login", login, controller.handle_login);

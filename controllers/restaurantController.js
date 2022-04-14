@@ -35,23 +35,20 @@ exports.dinnerMenu = function (req, res) {
 
 exports.getSingleDish = function (req, res) {
     let dish = req.params.name;
-    console.log("Controller");
     db.getSingleDish(dish)
         .then((dishes) => {
-            console.log("Processing");
+            console.log("Processing", dish);
             res.render("singleDish", {
                 title: "Restaurant - Dish Details",
                 dish: "dish",
                 dishes: dishes,
             });
-            console.log("In Single Dish in Controller.");
-            console.log("Menu Item: ", req.body.name);
         })
         .catch((err) => {
             console.log("Error: ");
             console.log(JSON.stringify(err));
         });
-}
+};
 
 exports.lunchMenu = function (req, res) {
     db.getLunchDishes()
