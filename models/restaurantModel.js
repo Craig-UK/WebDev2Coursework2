@@ -68,9 +68,12 @@ class Restaurant {
         return this;
     }
 
-    getAllDishes() {
+    getStarterDinnerDishes() {
         return new Promise((resolve, reject) => {
-            this.db.find({}, function (err, dishes) {
+            this.db.find({
+                dishType: "Starter",
+                menu: "Dinner"
+            }, function (err, dishes) {
                 if (err) {
                     reject(err);
                 } else {
@@ -84,7 +87,7 @@ class Restaurant {
     getDinnerDishes() {
         return new Promise((resolve, reject) => {
             this.db.find({
-                menu: "Dinner"
+                menu: "Dinner",
             }, function (err, dishes) {
                 if (err) {
                     reject(err);
@@ -95,6 +98,22 @@ class Restaurant {
             });
         });
     }
+
+    // getDinnerDishes(dishType) {
+    //     return new Promise((resolve, reject) => {
+    //         this.db.find({
+    //             menu: "Dinner",
+    //             'dishType': dishType
+    //         }, function (err, dishes) {
+    //             if (err) {
+    //                 reject(err);
+    //             } else {
+    //                 resolve(dishes);
+    //                 console.log('getDinnerDishes returns: ', dishes);
+    //             }
+    //         });
+    //     });
+    // }
 
     getLunchDishes() {
         return new Promise((resolve, reject) => {

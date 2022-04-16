@@ -1,5 +1,12 @@
 const restaurantDAO = require("../models/restaurantModel");
 const userDao = require("../models/userModel.js");
+// const puppeteer = require('puppeteer');
+const jsdom = require("jsdom");
+const { JSDOM } = jsdom;
+const { document } = jsdom;
+// var http = require('http');
+const fs = require('fs');
+// const cheerio = require('cheerio');
 
 const db = new restaurantDAO();
 db.init();
@@ -20,6 +27,28 @@ exports.aboutPage = function (req, res) {
 };
 
 exports.dinnerMenu = function (req, res) {
+    // const dom = new JSDOM('dinnerMenu.mustache').window
+    // let dishType = document.querySelector('#dishType');
+    // console.log(dishType.html());
+    // if (dishType == 'Starter') {
+    //     dishType = 'Starter';
+    //     console.log(dishType);
+    // }
+    // if (dishType == 'Main Course') {
+    //     dishType = 'Main Course';
+    // }
+    // let dishType = req.body.dishType;
+    // db.getDinnerDishes(dishType)
+    //     .then((dishes) => {
+    //         res.render("dinnerMenu", {
+    //             title: "Restaurant - Dinner Menu",
+    //             dishes: dishes,
+    //         });
+    //     })
+    //     .catch((err) => {
+    //         console.log("An Error Occurred: ");
+    //         console.log(JSON.stringify(err));
+    //     });
     db.getDinnerDishes()
         .then((dishes) => {
             res.render("dinnerMenu", {
@@ -36,7 +65,7 @@ exports.dinnerMenu = function (req, res) {
 exports.getSingleDish = function (req, res) {
     let dish = req.params.name;
     db.getSingleDish(dish)
-        .then((dishes) => {
+      .then((dishes) => {
             console.log("Processing", dish);
             res.render("singleDish", {
                 title: "Restaurant - Dish Details",
