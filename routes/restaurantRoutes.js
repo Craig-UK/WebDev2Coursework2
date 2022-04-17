@@ -22,6 +22,7 @@ router.get("/dinnermenu", verify, controller.dinnerMenuLoggedIn);
 router.get("/lunchmenu", verify, controller.lunchMenuLoggedIn);
 router.get("/editdinner", verify, controller.editDinner);
 router.get("/editlunch", verify, controller.editLunch);
+router.get("/dish/edit/:name", verify, controller.editDish);
 router.get("/add", verify, controller.addNewDish);
 router.post("/add", verify, controller.post_new_dish);
 router.get("/logout", controller.logout);

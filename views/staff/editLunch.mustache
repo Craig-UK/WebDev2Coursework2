@@ -7,6 +7,21 @@
 <body>
     {{>nav}}
     <h1>Edit Lunch Menu</h1>
+    {{#dishes}}
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">{{name}}</th>
+                    <th scope="col"><a href="/dish/edit/{{name}}">Edit</a></th>
+                    <th scope="col"><a href="/dish/delete/{{_id}}">Delete</a></th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    {{/dishes}}
 </body>
 
 </html>

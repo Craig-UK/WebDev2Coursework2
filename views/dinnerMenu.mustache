@@ -8,7 +8,7 @@
     {{>nav}}
     <h1>Dinner Menu</h1>
     <h2 id="dishType">Starters</h2>
-    {{#dishes}}
+    {{#starter}}
         <div class="card">
         <div class="card-body">
             <h4 class="card-title"><a href="/dish/{{name}}">{{name}}</a></h4>
@@ -17,10 +17,13 @@
             </p>
         </div>
     </div>
-    {{/dishes}}
+    {{/starter}}
+    {{^starter}}
+    <p> No dishes </p>
+    {{/starter}}
     <h2>Main Courses</h2>
-    {{#dishes}}
-    <div class="card">
+    {{#main}}
+        <div class="card">
         <div class="card-body">
             <h4 class="card-title"><a href="/dish/{{name}}">{{name}}</a></h4>
             <p class="card-text">
@@ -28,7 +31,10 @@
             </p>
         </div>
     </div>
-    {{/dishes}}
+    {{/main}}
+    {{^main}}
+    <p> No dishes </p>
+    {{/main}}
     <h2>Desserts</h2>
     <h2>Cold Drinks</h2>
     <h2>Warm Drinks</h2>

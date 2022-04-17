@@ -68,36 +68,21 @@ class Restaurant {
         return this;
     }
 
-    getStarterDinnerDishes() {
-        return new Promise((resolve, reject) => {
-            this.db.find({
-                dishType: "Starter",
-                menu: "Dinner"
-            }, function (err, dishes) {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(dishes);
-                }
-                console.log("The database contains these dishes: ", dishes);
-            });
-        });
-    }
-
-    getDinnerDishes() {
-        return new Promise((resolve, reject) => {
-            this.db.find({
-                menu: "Dinner",
-            }, function (err, dishes) {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(dishes);
-                    console.log('getDinnerDishes returns: ', dishes);
-                }
-            });
-        });
-    }
+    // getStarterDinnerDishes() {
+    //     return new Promise((resolve, reject) => {
+    //         this.db.find({
+    //             dishType: "Starter",
+    //             menu: "Dinner"
+    //         }, function (err, dishes) {
+    //             if (err) {
+    //                 reject(err);
+    //             } else {
+    //                 resolve(dishes);
+    //             }
+    //             console.log("The database contains these dishes: ", dishes);
+    //         });
+    //     });
+    // }
 
     // getDinnerDishes(dishType) {
     //     return new Promise((resolve, reject) => {
@@ -115,7 +100,115 @@ class Restaurant {
     //     });
     // }
 
-    getLunchDishes() {
+    // getDinnerDishes(dishType) {
+    //     var dish = {
+    //         dishType: dishType
+    //     }
+    //     console.log("Dish", dish);
+    //     if(dish.dishType == "Starter") {
+    //         return new Promise((resolve, reject) => {
+    //             this.db.find({
+    //                 menu: "Dinner",
+    //                 dishType: "Starter"
+    //             }, function(err, starter) {
+    //                 if(err) {
+    //                     reject(err);
+    //                 } else {
+    //                     resolve(starter);
+    //                     console.log("Starters returned: ", starter);
+    //                 }
+    //             })
+    //         })
+    //     }
+
+    //     if(dish.dishType == "Main Course") {
+    //         return new Promise((resolve, reject) => {
+    //             this.db.find({
+    //                 menu: "Dinner",
+    //                 dishType: "Main Course"
+    //             }, function(err, main) {
+    //                 if(err) {
+    //                     reject(err);
+    //                 } else {
+    //                     resolve(main);
+    //                     console.log("Starters returned: ", main);
+    //                 }
+    //             })
+    //         })
+    //     }
+    // }
+
+    getDinnerDishes() {
+        return new Promise((resolve, reject) => {
+            // this.db.find({
+            //     menu: "Dinner",
+            // }, function (err, dishes) {
+            //     if (err) {
+            //         reject(err);
+            //     } else {
+            //         resolve(dishes);
+            //         console.log('getDinnerDishes returns: ', dishes);
+            //     }
+            // });
+
+            this.db.find({
+                menu: "Dinner",
+                dishType: "Starter"
+            }, function (err, starter) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(starter);
+                    console.log('Starter', starter);
+                }
+            });
+
+            this.db.find({
+                menu: "Dinner",
+                dishType: "Main Course"
+            }, function (err, main) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(main);
+                    console.log('Main Course', main);
+                }
+            });
+        });
+    }
+
+    // getDinnerDishes() {
+    //     return new Promise((resolve, reject) => {
+    //         this.db.find({
+    //             menu: "Dinner",
+    //             dishType: "Starter"
+    //         }, function (err, starter) {
+    //             if (err) {
+    //                 reject(err);
+    //             } else {
+    //                 resolve(starter);
+    //                 console.log('getDinnerDishes returns: ', starter);
+    //             }
+    //         });
+    //     });
+    // }
+
+    getAllDinnerDishes() {
+        return new Promise((resolve, reject) => {
+            this.db.find({
+                menu: "Dinner"
+            }, function (err, dishes) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(dishes);
+                    console.log('getAllDinnerDishes returns: ', dishes);
+                }
+            });
+        });
+    }
+
+    getAllLunchDishes() {
         return new Promise((resolve, reject) => {
             this.db.find({
                 menu: "Lunch"
@@ -124,7 +217,7 @@ class Restaurant {
                     reject(err);
                 } else {
                     resolve(dishes);
-                    console.log('getLunchDishes returns: ', dishes);
+                    console.log('getAllLunchDishes returns: ', dishes);
                 }
             });
         });
@@ -151,16 +244,31 @@ class Restaurant {
         });
     }
 
+    editDish(menuName) {
+        return new Promise((resolve, reject) => {
+            this.db.find({
+                'name': menuName
+            }, function (err, dishes) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(dishes);
+                    console.log('editDish returns: ', dishes);
+                }
+            });
+        });
+    }
+
     getSingleDish(menuName) {
         return new Promise((resolve, reject) => {
             this.db.find({
                 'name': menuName
-            }, function (err, entries) {
+            }, function (err, dishes) {
                 if (err) {
                     reject(err);
                 } else {
-                    resolve(entries);
-                    console.log('getSingleDish returns: ', entries);
+                    resolve(dishes);
+                    console.log('getSingleDish returns: ', dishes);
                 }
             });
         });

@@ -2,8 +2,12 @@ const restaurantDAO = require("../models/restaurantModel");
 const userDao = require("../models/userModel.js");
 // const puppeteer = require('puppeteer');
 const jsdom = require("jsdom");
-const { JSDOM } = jsdom;
-const { document } = jsdom;
+const {
+    JSDOM
+} = jsdom;
+const {
+    document
+} = jsdom;
 // var http = require('http');
 const fs = require('fs');
 // const cheerio = require('cheerio');
@@ -49,23 +53,66 @@ exports.dinnerMenu = function (req, res) {
     //         console.log("An Error Occurred: ");
     //         console.log(JSON.stringify(err));
     //     });
-    db.getDinnerDishes()
-        .then((dishes) => {
+    // let dishType = {
+    //     dishType: "Starter",
+    //     dishType: "Main Course"
+    // };
+    let dishType = "Starter";
+    // let dishType = "Main Course";
+    db.getDinnerDishes(dishType)
+        .then((starter) => {
             res.render("dinnerMenu", {
                 title: "Restaurant - Dinner Menu",
-                dishes: dishes,
+                starter: starter,
             });
         })
         .catch((err) => {
             console.log("An Error Occurred: ");
             console.log(JSON.stringify(err));
         });
+    // db.getDinnerDishes(dishType)
+    //     .then((main) => {
+    //         res.render("dinnerMenu", {
+    //             title: "Restaurant - Dinner Menu",
+    //             main: main,
+    //         });
+    //     })
+    //     .catch((err) => {
+    //         console.log("An Error Occurred: ");
+    //         console.log(JSON.stringify(err));
+    //     });
+    // db.getDinnerDishes(dishType)
+    //     .then((starter, main) => {
+    //         res.render("dinnerMenu", {
+    //             title: "Restaurant - Dinner Menu",
+    //             starter: starter,
+    //             main: main
+    //         });
+    //     })
+    //     .catch((err) => {
+    //         console.log("An Error Occurred: ");
+    //         console.log(JSON.stringify(err));
+    //     });
 };
+
+// exports.starterDinner = function (req, res) {
+//     db.getStarterDinnerDishes()
+//       .then((starter) => {
+//         res.render("dinnerMenu", {
+//             title: "Restaurant - Dinner Menu",
+//             starter: starter,
+//         });
+//       })
+//       .catch((err) => {
+//         console.log("An Error Occurred: ");
+//         console.log(JSON.stringify(err));
+//     });
+// }
 
 exports.getSingleDish = function (req, res) {
     let dish = req.params.name;
     db.getSingleDish(dish)
-      .then((dishes) => {
+        .then((dishes) => {
             console.log("Processing", dish);
             res.render("singleDish", {
                 title: "Restaurant - Dish Details",
@@ -141,18 +188,54 @@ exports.lunchMenuLoggedIn = function (req, res) {
 };
 
 exports.editDinner = function (req, res) {
-    res.render("staff/editDinner", {
-        title: "Restaurant - Edit Dinner Menu",
-        staff: "staff"
-    });
+    db.getAllDinnerDishes()
+        .then((dishes) => {
+            res.render("staff/editDinner", {
+                title: "Restaurant - Lunch Menu",
+                dishes: dishes,
+                staff: "staff"
+            });
+            console.log("Returned in editDinner ", dishes)
+        })
+        .catch((err) => {
+            console.log("An Error Occurred: ");
+            console.log(JSON.stringify(err));
+        });
 }
 
 exports.editLunch = function (req, res) {
-    res.render("staff/editLunch", {
-        title: "Restaurant - Edit Lunch Menu",
-        staff: "staff"
-    });
+    db.getAllLunchDishes()
+        .then((dishes) => {
+            res.render("staff/editDinner", {
+                title: "Restaurant - Lunch Menu",
+                dishes: dishes,
+                staff: "staff"
+            });
+            console.log("Returned in editDinner ", dishes)
+        })
+        .catch((err) => {
+            console.log("An Error Occurred: ");
+            console.log(JSON.stringify(err));
+        });
 }
+
+exports.editDish = function (req, res) {
+    let dish = req.params.name;
+    db.editDish(dish)
+        .then((dishes) => {
+            console.log("Processing", dish);
+            res.render("staff/editDish", {
+                title: "Restaurant - Dish Details",
+                dish: "dish",
+                staff: "staff",
+                dishes: dishes,
+            });
+        })
+        .catch((err) => {
+            console.log("Error: ");
+            console.log(JSON.stringify(err));
+        });
+};
 
 exports.addNewDish = function (req, res) {
     res.render("staff/addNewDish", {
