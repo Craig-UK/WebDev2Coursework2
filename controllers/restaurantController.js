@@ -211,7 +211,7 @@ exports.editLunch = function (req, res) {
                 dishes: dishes,
                 staff: "staff"
             });
-            console.log("Returned in editDinner ", dishes)
+            console.log("Returned in editLunch ", dishes)
         })
         .catch((err) => {
             console.log("An Error Occurred: ");
@@ -221,7 +221,7 @@ exports.editLunch = function (req, res) {
 
 exports.editDish = function (req, res) {
     let dish = req.params.name;
-    db.editDish(dish)
+    db.editDishPage(dish)
         .then((dishes) => {
             console.log("Processing", dish);
             res.render("staff/editDish", {
@@ -258,6 +258,18 @@ exports.post_new_dish = function (req, res) {
         return;
     }
     db.addNewDish(req.body.name, req.body.ingredients, req.body.allergyInfo, req.body.dishType, req.body.image,
+        req.body.menu, req.body.price, req.body.description);
+    res.redirect("/home");
+}
+
+exports.post_edit_dish = function (req, res) {
+    console.log("Processing edit dish.");
+    if (!req.body.name || !req.body.ingredients || !req.body.allergyInfo || !req.body.dishType ||
+        !req.body.image || !req.body.menu || !req.body.price || !req.body.description) {
+        res.status(400).send("All fields are required.");
+        return;
+    }
+    db.editDish(req.body.name, req.body.ingredients, req.body.allergyInfo, req.body.dishType, req.body.image,
         req.body.menu, req.body.price, req.body.description);
     res.redirect("/home");
 }

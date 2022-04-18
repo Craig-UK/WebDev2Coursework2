@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const methodOverride = require('method-override');
 require('dotenv').config();
 
 const cookieParser = require('cookie-parser');
@@ -21,6 +22,7 @@ app.set('view engine', 'mustache');
 
 const router = require('./routes/restaurantRoutes');
 app.use('/', router);
+app.use(methodOverride('_method'));
 
 app.listen(3000, () => {
     console.log('Server started on port 3000. Ctrl^c to quit.');

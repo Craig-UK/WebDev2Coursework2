@@ -223,6 +223,21 @@ class Restaurant {
         });
     }
 
+    getLunchDishes() {
+        return new Promise((resolve, reject) => {
+            this.db.find({
+                menu: "Lunch"
+            }, function (err, dishes) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(dishes);
+                    console.log('getAllLunchDishes returns: ', dishes);
+                }
+            });
+        });
+    }
+
     addNewDish(name, ingredients, allergyInfo, dishType, image, menu, price, description) {
         var entry = {
             name: name,
@@ -244,7 +259,30 @@ class Restaurant {
         });
     }
 
-    editDish(menuName) {
+    editDish(name, ingredients, allergyInfo, dishType, image, menu, price, description) {
+        console.log("Started updating dish.", name);
+        this.db.update({
+            'name': name
+        }, 
+            {$set: {
+                'name': name,
+                'ingredients': ingredients,
+                'allergyInfo': allergyInfo,
+                'dishType': dishType,
+                'image': image,
+                'menu': menu,
+                'price': price,
+                'description': description
+            }}, { multi: false }, function (err, doc) {
+                if (err) {
+                    console.log("Error updating dish.", name)
+                } else {
+                    console.log("Dish successfully updated.", doc);
+                }
+            });
+    }
+
+    editDishPage(menuName) {
         return new Promise((resolve, reject) => {
             this.db.find({
                 'name': menuName
@@ -253,7 +291,7 @@ class Restaurant {
                     reject(err);
                 } else {
                     resolve(dishes);
-                    console.log('editDish returns: ', dishes);
+                    console.log('editDishPage returns: ', dishes);
                 }
             });
         });

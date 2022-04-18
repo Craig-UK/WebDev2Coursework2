@@ -26,8 +26,8 @@ to the final Web Application.
 - [x] Show dishes on the correct menus (e.g. Dinners on Dinner menu and Lunches on Lunch Menu)
 - [ ] Show dish types under the correct headings (e.g. Starters, Main Coures, etc.)
 - [x] Add single dish page with more details of the selected dish
-- [ ] Create the edit lunch function
-- [ ] Create the edit dinner function
+- [x] Create the edit lunch function
+- [x] Create the edit dinner function
 - [ ] Add delete dish function
 - [ ] Make the UI of all pages
 - [ ] Deploy website
