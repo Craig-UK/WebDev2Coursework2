@@ -1,15 +1,15 @@
 const restaurantDAO = require("../models/restaurantModel");
 const userDao = require("../models/userModel.js");
 // const puppeteer = require('puppeteer');
-const jsdom = require("jsdom");
-const {
-    JSDOM
-} = jsdom;
-const {
-    document
-} = jsdom;
+// const jsdom = require("jsdom");
+// const {
+//     JSDOM
+// } = jsdom;
+// const {
+//     document
+// } = jsdom;
 // var http = require('http');
-const fs = require('fs');
+// const fs = require('fs');
 // const cheerio = require('cheerio');
 
 const db = new restaurantDAO();
@@ -57,9 +57,9 @@ exports.dinnerMenu = function (req, res) {
     //     dishType: "Starter",
     //     dishType: "Main Course"
     // };
-    let dishType = "Starter";
+    // let dishType = "Starter";
     // let dishType = "Main Course";
-    db.getDinnerDishes(dishType)
+    db.getDinnerDishes()
         .then((starter) => {
             res.render("dinnerMenu", {
                 title: "Restaurant - Dinner Menu",
@@ -87,6 +87,17 @@ exports.dinnerMenu = function (req, res) {
     //             title: "Restaurant - Dinner Menu",
     //             starter: starter,
     //             main: main
+    //         });
+    //     })
+    //     .catch((err) => {
+    //         console.log("An Error Occurred: ");
+    //         console.log(JSON.stringify(err));
+    //     });
+    // db.getDinnerDishes()
+    //     .then((dishes) => {
+    //         res.render("dinnerMenu", {
+    //             title: "Restaurant - Dinner Menu",
+    //             dishes: dishes,
     //         });
     //     })
     //     .catch((err) => {
@@ -162,7 +173,7 @@ exports.dinnerMenuLoggedIn = function (req, res) {
         .then((dishes) => {
             res.render("dinnerMenu", {
                 title: "Restaurant - Dinner Menu",
-                dishes: dishes,
+                starter: dishes,
                 staff: "staff"
             });
         })
@@ -175,7 +186,7 @@ exports.dinnerMenuLoggedIn = function (req, res) {
 exports.lunchMenuLoggedIn = function (req, res) {
     db.getLunchDishes()
         .then((dishes) => {
-            res.render("LunchMenu", {
+            res.render("lunchMenu", {
                 title: "Restaurant - Lunch Menu",
                 dishes: dishes,
                 staff: "staff"
@@ -272,6 +283,12 @@ exports.post_edit_dish = function (req, res) {
     db.editDish(req.body.name, req.body.ingredients, req.body.allergyInfo, req.body.dishType, req.body.image,
         req.body.menu, req.body.price, req.body.description);
     res.redirect("/home");
+}
+
+exports.deleteDish = function (req, res) {
+    let id = req.params._id;
+    db.deleteDish(id);
+    res.redirect("/home")
 }
 
 /*

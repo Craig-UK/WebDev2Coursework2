@@ -174,6 +174,20 @@ class Restaurant {
                     console.log('Main Course', main);
                 }
             });
+
+            //  this.db.find(dishes => {
+            //      const dinner = {
+            //          starter: { dishes: [] }
+            //      }
+            // }, function (err, dish) {
+            //     dishes.forEach(dish => {
+            //         if(dish.dishType === "Starter") {
+            //             dinner.starter.dishes.push(dish);
+            //         }
+            //     });
+            // });
+
+            
         });
     }
 
@@ -263,8 +277,8 @@ class Restaurant {
         console.log("Started updating dish.", name);
         this.db.update({
             'name': name
-        }, 
-            {$set: {
+        }, {
+            $set: {
                 'name': name,
                 'ingredients': ingredients,
                 'allergyInfo': allergyInfo,
@@ -273,13 +287,16 @@ class Restaurant {
                 'menu': menu,
                 'price': price,
                 'description': description
-            }}, { multi: false }, function (err, doc) {
-                if (err) {
-                    console.log("Error updating dish.", name)
-                } else {
-                    console.log("Dish successfully updated.", doc);
-                }
-            });
+            }
+        }, {
+            multi: false
+        }, function (err, doc) {
+            if (err) {
+                console.log("Error updating dish.", name)
+            } else {
+                console.log("Dish successfully updated.", doc);
+            }
+        });
     }
 
     editDishPage(menuName) {
@@ -309,6 +326,19 @@ class Restaurant {
                     console.log('getSingleDish returns: ', dishes);
                 }
             });
+        });
+    }
+
+    deleteDish(id) {
+        console.log("Started deleting dish.", id);
+        this.db.remove({
+            '_id': id
+        }, function (err, doc) {
+            if (err) {
+                console.log("Error deleting dish.", id)
+            } else {
+                console.log("Dish successfully deleted.", doc);
+            }
         });
     }
 

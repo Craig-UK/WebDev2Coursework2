@@ -2,7 +2,20 @@
 Restaurant Website using Nodejs, Express and Mustache (View Engine) for Web Application Development 2 Coursework 2.
 ## How to start the Web Application
 Here's how to start the Web Application on your local machine:
-###### Start by installing the required node modules
+###### Clone the Repository
+```
+git clone https://github.com/Craig-UK/WebDev2Coursework2.git
+```
+###### Create the .env file
+```
+cd WebDev2Coursework2
+touch .env
+```
+###### Add to the .env file
+```
+ACCESS_TOKEN_SECRET=<secret_text>
+```
+###### Install the required node modules
 ```
 npm install
 ```
@@ -28,6 +41,6 @@ to the final Web Application.
 - [x] Add single dish page with more details of the selected dish
 - [x] Create the edit lunch function
 - [x] Create the edit dinner function
-- [ ] Add delete dish function
+- [x] Add delete dish function
 - [ ] Make the UI of all pages
 - [ ] Deploy website
