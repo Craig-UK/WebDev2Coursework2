@@ -6,22 +6,27 @@
 
 <body>
     {{>nav}}
-    <h1>Edit Dinner Menu</h1>
-    {{#dishes}}
-    <div class="container">
+    <h1 class="text-center">Edit Dinner Menu</h1>
+    <div class="table-responsive">
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">{{name}}</th>
-                    <th scope="col"><a href="/dish/edit/{{name}}">Edit</a></th>
-                    <th scope="col"><a href="/dish/delete/{{_id}}">Delete</a></th>
+                    <th scope="col">Dish Name</th>
+                    <th scope="col">Edit Dish</th>
+                    <th scope="col">Delete Dish</th>
                 </tr>
             </thead>
+            {{#dishes}}
             <tbody>
+                <tr>
+                    <th scope="row">{{name}}</th>
+                    <td><a href="/dish/edit/{{name}}">Edit</a></td>
+                    <td><a href="/dish/delete/{{_id}}">Delete</a></td>
+                </tr>
             </tbody>
+            {{/dishes}}
         </table>
     </div>
-    {{/dishes}}
 </body>
 
 </html>

@@ -6,10 +6,10 @@
 
 <body>
     {{>nav}}
-    <h1>Lunch Menu</h1>
-    <h2>Starters</h2>
+    <h1 class="text-center">Lunch Menu</h1>
+    <h2 class="text-center">Starters</h2>
     {{#dishes}}
-    <div class="card">
+    <div class="card text-center">
         <div class="card-body">
             <h4 class="card-title"><a href="/dish/{{name}}">{{name}}</a></h4>
             <p class="card-text">
@@ -18,10 +18,10 @@
         </div>
     </div>
     {{/dishes}}
-    <h2>Main Courses</h2>
-    <h2>Desserts</h2>
-    <h2>Cold Drinks</h2>
-    <h2>Warm Drinks</h2>
+    <h2 class="text-center">Main Courses</h2>
+    <h2 class="text-center">Desserts</h2>
+    <h2 class="text-center">Cold Drinks</h2>
+    <h2 class="text-center">Warm Drinks</h2>
 </body>
 
 </html>

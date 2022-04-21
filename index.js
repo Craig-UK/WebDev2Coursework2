@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-const methodOverride = require('method-override');
 require('dotenv').config();
 
 const cookieParser = require('cookie-parser');
@@ -22,7 +21,6 @@ app.set('view engine', 'mustache');
 
 const router = require('./routes/restaurantRoutes');
 app.use('/', router);
-app.use(methodOverride('_method'));
 
 const PORT = process.env.PORT || 3000;
 
