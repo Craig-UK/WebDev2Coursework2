@@ -7,8 +7,36 @@
 <body>
     {{>nav}}
     <h1 class="text-center">Lunch Menu</h1>
-    <h2 class="text-center">Starters</h2>
-    {{#dishes}}
+    <h2 id="dishType" class="text-center">Starters</h2>
+    {{#types.starter}}
+        <div class="card text-center">
+        <div class="card-body">
+            <h4 class="card-title"><a href="/dish/{{name}}">{{name}}</a></h4>
+            <p class="card-text">
+                Ingredients: {{ingredients}}
+            </p>
+        </div>
+    </div>
+    {{/types.starter}}
+    {{^types.starter}}
+    <p class="text-center"> No dishes </p>
+    {{/types.starter}}
+    <h2 class="text-center">Main Courses</h2>
+    {{#types.main}}
+        <div class="card text-center">
+        <div class="card-body">
+            <h4 class="card-title"><a href="/dish/{{name}}">{{name}}</a></h4>
+            <p class="card-text">
+                Ingredients: {{ingredients}}
+            </p>
+        </div>
+    </div>
+    {{/types.main}}
+    {{^types.main}}
+    <p class="text-center"> No dishes </p>
+    {{/types.main}}
+    <h2 class="text-center">Desserts</h2>
+    {{#types.desserts}}
     <div class="card text-center">
         <div class="card-body">
             <h4 class="card-title"><a href="/dish/{{name}}">{{name}}</a></h4>
@@ -17,11 +45,38 @@
             </p>
         </div>
     </div>
-    {{/dishes}}
-    <h2 class="text-center">Main Courses</h2>
-    <h2 class="text-center">Desserts</h2>
+    {{/types.desserts}}
+    {{^types.desserts}}
+    <p class="text-center"> No dishes </p>
+    {{/types.desserts}}
     <h2 class="text-center">Cold Drinks</h2>
+    {{#types.coldDrink}}
+    <div class="card text-center">
+        <div class="card-body">
+            <h4 class="card-title"><a href="/dish/{{name}}">{{name}}</a></h4>
+            <p class="card-text">
+                Ingredients: {{ingredients}}
+            </p>
+        </div>
+    </div>
+    {{/types.coldDrink}}
+    {{^types.coldDrink}}
+    <p class="text-center"> No dishes </p>
+    {{/types.coldDrink}}
     <h2 class="text-center">Warm Drinks</h2>
+    {{#types.warmDrink}}
+    <div class="card text-center">
+        <div class="card-body">
+            <h4 class="card-title"><a href="/dish/{{name}}">{{name}}</a></h4>
+            <p class="card-text">
+                Ingredients: {{ingredients}}
+            </p>
+        </div>
+    </div>
+    {{/types.warmDrink}}
+    {{^types.warmDrink}}
+    <p class="text-center"> No dishes </p>
+    {{/types.warmDrink}}
 </body>
 
 </html>

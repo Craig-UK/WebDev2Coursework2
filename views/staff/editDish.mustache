@@ -15,7 +15,7 @@
                     Menu Item Name
                 </label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Menu Item Name">
+                    <input type="text" class="form-control" id="name" name="name" placeholder="{{name}}" value="{{name}}">
                 </div>
             </div>
             <div class="form-group">
@@ -24,7 +24,7 @@
                 </label>
                 <div class="col-sm-10">
                     <input type="ingredients" class="form-control" id="ingredients" name="ingredients"
-                        placeholder="Menu Item Ingredients">
+                        placeholder="{{ingredients}}" value="{{ingredients}}">
                 </div>
             </div>
             <div class="form-group">
@@ -33,7 +33,7 @@
                 </label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="description" name="description"
-                        placeholder="Menu Item Description">
+                        placeholder="{{description}}" value="{{description}}">
                 </div>
             </div>
             <div class="form-group">
@@ -41,7 +41,7 @@
                     Dish Type
                 </label>
             <select class="form-control col-sm-3" id="dishType" name="dishType">
-                    <option selected>Dish Type</option>
+                    <option selected>{{dishType}}</option>
                     <option>Starter</option>
                     <option>Main Course</option>
                     <option>Dessert</option>
@@ -60,7 +60,7 @@
                     Dinner or Lunch Menu?
                 </label>
                 <select class="form-control col-sm-3" id="menu" name="menu">
-                    <option selected>Dinner or Lunch Menu?</option>
+                    <option selected>{{menu}}</option>
                     <option>Dinner</option>
                     <option>Lunch</option>
                 </select>
@@ -71,7 +71,7 @@
                 </label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="allergyInfo" name="allergyInfo"
-                        placeholder="Menu Item Allergy Information">
+                        placeholder="{{allergyInfo}}" value="{{allergyInfo}}">
                 </div>
             </div>
             <div class="form-group">
@@ -79,7 +79,7 @@
                     Menu Item Price
                 </label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" id="price" name="price" placeholder="Menu Item Price">
+                    <input type="text" class="form-control" id="price" name="price" placeholder="{{price}}" value="{{price}}">
                 </div>
             </div>
 

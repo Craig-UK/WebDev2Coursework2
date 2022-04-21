@@ -37,7 +37,7 @@ to the final Web Application.
 - [x] Staff can access all pages and instead of login, the navbar shows "logout" when staff are logged in
 - [x] Add the add new dish functionality
 - [x] Show dishes on the correct menus (e.g. Dinners on Dinner menu and Lunches on Lunch Menu)
-- [ ] Show dish types under the correct headings (e.g. Starters, Main Coures, etc.)
+- [x] Show dish types under the correct headings (e.g. Starters, Main Coures, etc.)
 - [x] Add single dish page with more details of the selected dish
 - [x] Create the edit lunch function
 - [x] Create the edit dinner function

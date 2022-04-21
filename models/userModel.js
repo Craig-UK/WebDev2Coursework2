@@ -1,20 +1,24 @@
-const Datastore = require("nedb");
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
-class UserDAO {
+const nedb = require('nedb');
+
+class User {
     constructor(dbFilePath) {
         if (dbFilePath) {
-            //embedded
-            this.db = new Datastore({ filename: dbFilePath,
-            autoload: true });
+            this.db = new nedb({
+                filename: dbFilePath,
+                autoload: true
+            });
+            console.log('Database connected to ' + dbFilePath);
         } else {
-            //in memory
-            this.db = new Datastore();
+            this.db = new nedb();
         }
     }
     init() {
         this.db.insert({
+            first_name: 'Peter',
+            last_name: 'Albert',
             email: 'peter@restaurant.com',
             password:
             '$2b$12$RJPe6E/osVbM0URFQBD4JuQyPdcZAF3AbZ5vKMQZE5CDtPiERQh9y'
@@ -36,7 +40,7 @@ class UserDAO {
     }
 }
 
-const dao = new UserDAO();
-dao.init();
+const dao = new User('staff.db');
+// dao.init();
 
 module.exports = dao;

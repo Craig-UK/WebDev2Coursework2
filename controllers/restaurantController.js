@@ -12,8 +12,8 @@ const userDao = require("../models/userModel.js");
 // const fs = require('fs');
 // const cheerio = require('cheerio');
 
-const db = new restaurantDAO();
-db.init();
+const db = new restaurantDAO('dish.db');
+// db.init();
 
 /* 
 NOT LOGGED IN STAFF
@@ -59,17 +59,17 @@ exports.dinnerMenu = function (req, res) {
     // };
     // let dishType = "Starter";
     // let dishType = "Main Course";
-    db.getDinnerDishes()
-        .then((starter) => {
-            res.render("dinnerMenu", {
-                title: "Restaurant - Dinner Menu",
-                starter: starter,
-            });
-        })
-        .catch((err) => {
-            console.log("An Error Occurred: ");
-            console.log(JSON.stringify(err));
-        });
+    // db.getDinnerDishes()
+    //     .then((starter) => {
+    //         res.render("dinnerMenu", {
+    //             title: "Restaurant - Dinner Menu",
+    //             starter: starter,
+    //         });
+    //     })
+    //     .catch((err) => {
+    //         console.log("An Error Occurred: ");
+    //         console.log(JSON.stringify(err));
+    //     });
     // db.getDinnerDishes(dishType)
     //     .then((main) => {
     //         res.render("dinnerMenu", {
@@ -104,6 +104,41 @@ exports.dinnerMenu = function (req, res) {
     //         console.log("An Error Occurred: ");
     //         console.log(JSON.stringify(err));
     //     });
+    db.db.find({'menu':'Dinner'}, function(err,dish) {
+        const types = {
+            starter: [],
+            main: [],
+            dessert: [],
+            coldDrink: [],
+            warmDrink: []
+        }
+        if (err) {
+            console.log(err);
+        } else {
+            dish.forEach(function(dish) {
+                if(dish.dishType === 'Starter') {
+                    console.log("Starters: ", dish);
+                    return types.starter.push(dish)
+                } else if(dish.dishType === 'Main Course') {
+                    console.log("Main Courses: ", dish);
+                    return types.main.push(dish);
+                } else if(dish.dishType === 'Dessert') {
+                    console.log("Desserts: ", dish);
+                    return types.dessert.push(dish);
+                } else if(dish.dishType === 'Cold Drink') {
+                    console.log("Cold Drinks: ", dish);
+                    return types.coldDrink.push(dish);
+                } else if(dish.dishType === 'Warm Drink') {
+                    console.log("Warm Drinks: ", dish);
+                    return types.warmDrink.push(dish);
+                }
+            });
+            res.render('dinnerMenu', {
+                title: "Restaurant - Dinner Menu",
+                types: types
+            });
+        }
+    });
 };
 
 // exports.starterDinner = function (req, res) {
@@ -138,17 +173,41 @@ exports.getSingleDish = function (req, res) {
 };
 
 exports.lunchMenu = function (req, res) {
-    db.getLunchDishes()
-        .then((dishes) => {
-            res.render("LunchMenu", {
-                title: "Restaurant - Lunch Menu",
-                dishes: dishes,
+    db.db.find({'menu':'Lunch'}, function(err,dish) {
+        const types = {
+            starter: [],
+            main: [],
+            dessert: [],
+            coldDrink: [],
+            warmDrink: []
+        }
+        if (err) {
+            console.log(err);
+        } else {
+            dish.forEach(function(dish) {
+                if(dish.dishType === 'Starter') {
+                    console.log("Starters: ", dish);
+                    return types.starter.push(dish)
+                } else if(dish.dishType === 'Main Course') {
+                    console.log("Main Courses: ", dish);
+                    return types.main.push(dish);
+                } else if(dish.dishType === 'Dessert') {
+                    console.log("Desserts: ", dish);
+                    return types.dessert.push(dish);
+                } else if(dish.dishType === 'Cold Drink') {
+                    console.log("Cold Drinks: ", dish);
+                    return types.coldDrink.push(dish);
+                } else if(dish.dishType === 'Warm Drink') {
+                    console.log("Warm Drinks: ", dish);
+                    return types.warmDrink.push(dish);
+                }
             });
-        })
-        .catch((err) => {
-            console.log("An Error Occurred: ");
-            console.log(JSON.stringify(err));
-        });
+            res.render('lunchMenu', {
+                title: "Restaurant - Lunch Menu",
+                types: types
+            });
+        }
+    });
 };
 
 /*
@@ -169,33 +228,81 @@ exports.aboutPageLoggedIn = function (req, res) {
 };
 
 exports.dinnerMenuLoggedIn = function (req, res) {
-    db.getDinnerDishes()
-        .then((dishes) => {
-            res.render("dinnerMenu", {
+    db.db.find({'menu':'Dinner'}, function(err,dish) {
+        const types = {
+            starter: [],
+            main: [],
+            dessert: [],
+            coldDrink: [],
+            warmDrink: []
+        }
+        if (err) {
+            console.log(err);
+        } else {
+            dish.forEach(function(dish) {
+                if(dish.dishType === 'Starter') {
+                    console.log("Starters: ", dish);
+                    return types.starter.push(dish)
+                } else if(dish.dishType === 'Main Course') {
+                    console.log("Main Courses: ", dish);
+                    return types.main.push(dish);
+                } else if(dish.dishType === 'Dessert') {
+                    console.log("Desserts: ", dish);
+                    return types.dessert.push(dish);
+                } else if(dish.dishType === 'Cold Drink') {
+                    console.log("Cold Drinks: ", dish);
+                    return types.coldDrink.push(dish);
+                } else if(dish.dishType === 'Warm Drink') {
+                    console.log("Warm Drinks: ", dish);
+                    return types.warmDrink.push(dish);
+                }
+            });
+            res.render('dinnerMenu', {
                 title: "Restaurant - Dinner Menu",
-                starter: dishes,
+                types: types,
                 staff: "staff"
             });
-        })
-        .catch((err) => {
-            console.log("An Error Occurred: ", err);
-            console.log(JSON.stringify(err));
-        });
+        }
+    });
 };
 
 exports.lunchMenuLoggedIn = function (req, res) {
-    db.getLunchDishes()
-        .then((dishes) => {
-            res.render("lunchMenu", {
+    db.db.find({'menu':'Lunch'}, function(err,dish) {
+        const types = {
+            starter: [],
+            main: [],
+            dessert: [],
+            coldDrink: [],
+            warmDrink: []
+        }
+        if (err) {
+            console.log(err);
+        } else {
+            dish.forEach(function(dish) {
+                if(dish.dishType === 'Starter') {
+                    console.log("Starters: ", dish);
+                    return types.starter.push(dish)
+                } else if(dish.dishType === 'Main Course') {
+                    console.log("Main Courses: ", dish);
+                    return types.main.push(dish);
+                } else if(dish.dishType === 'Dessert') {
+                    console.log("Desserts: ", dish);
+                    return types.dessert.push(dish);
+                } else if(dish.dishType === 'Cold Drink') {
+                    console.log("Cold Drinks: ", dish);
+                    return types.coldDrink.push(dish);
+                } else if(dish.dishType === 'Warm Drink') {
+                    console.log("Warm Drinks: ", dish);
+                    return types.warmDrink.push(dish);
+                }
+            });
+            res.render('lunchMenu', {
                 title: "Restaurant - Lunch Menu",
-                dishes: dishes,
+                types: types,
                 staff: "staff"
             });
-        })
-        .catch((err) => {
-            console.log("An Error Occurred: ");
-            console.log(JSON.stringify(err));
-        });
+        }
+    });
 };
 
 exports.editDinner = function (req, res) {
