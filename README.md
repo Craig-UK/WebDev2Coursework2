@@ -32,6 +32,9 @@ node index.js
 In the original development plans for the Web Application, there was customer login and customer register
 pages. I then realised, after feedback, that these pages were unnecessary, so they are no longer being added
 to the final Web Application.
+## Deployment
+###### This Web Application has been deployed using Heroku. You can check it out here:
+https://webdev2coursework2.herokuapp.com/
 ## Todo
 - [x] Staff Login function
 - [x] Staff can access all pages and instead of login, the navbar shows "logout" when staff are logged in
@@ -42,5 +45,8 @@ to the final Web Application.
 - [x] Create the edit lunch function
 - [x] Create the edit dinner function
 - [x] Add delete dish function
+- [ ] Allow staff to upload images when creating a dish
+- [ ] Images of the dish should appear on the menus page(dinner or lunch)
+- [ ] Images of the dish should appear on the dish details page
 - [ ] Make the UI of all pages
 - [ ] Deploy website
