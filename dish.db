@@ -1,6 +1,3 @@
-{"name":"Lasagna","ingredients":["Egg","Milk","Whole Wheat Bread"],"allergyInfo":["Milk","Egg"],"dishType":"Starter","image":"{imageURL}","menu":"Dinner","price":"3.50","description":"Delicious French Toast served with Maple Syrup","_id":"1nYdEj1uhY5y7Tcf"}
+{"name":"Lasagna","ingredients":"Egg,Milk,Whole Wheat Bread","allergyInfo":"Milk,Egg","dishType":"Starter","image":"lasagne.jpg","menu":"Dinner","price":"3.50","description":"Delicious French Toast served with Maple Syrup","_id":"1nYdEj1uhY5y7Tcf"}
 {"name":"French Toast","ingredients":["Egg","Milk","Whole Wheat Bread"],"allergyInfo":["Milk","Egg"],"dishType":"Starter","image":"{imageURL}","menu":"Lunch","price":"3.50","description":"Delicious French Toast served with Maple Syrup","_id":"SwHcJFWXuGDo2h6c"}
 {"name":"Test","ingredients":["Egg","Milk","Whole Wheat Bread"],"allergyInfo":["Milk","Egg"],"dishType":"Main Course","image":"{imageURL}","menu":"Dinner","price":"3.50","description":"Delicious French Toast served with Maple Syrup","_id":"UdEZeC0vGVxdfxUB"}
-{"name":"Testing","ingredients":"test","allergyInfo":"test","dishType":"Starter","image":"IMG_20200229_164759.jpg","menu":"Dinner","price":"3.70","description":"test","_id":"XSGRvuOb0lOE6ZQB"}
-{"name":"Lasagna","ingredients":"Egg,Milk,Whole Wheat Bread","allergyInfo":"Milk,Egg","dishType":"Main Course","image":"IMG_20200229_164759.jpg","menu":"Dinner","price":"3.50","description":"Delicious French Toast served with Maple Syrup","_id":"1nYdEj1uhY5y7Tcf"}
-{"$$deleted":true,"_id":"XSGRvuOb0lOE6ZQB"}

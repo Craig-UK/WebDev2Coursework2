@@ -1,0 +1,22 @@
+<html>
+
+<head>
+    {{>header}}
+</head>
+
+<body>
+    {{>nav}}
+    <h1 class="text-center">Error: 500 Internal Server Error.</h1>
+    {{^staff}}
+    <div class="form-group d-flex justify-content-center">
+        <a href="/">Go to homepage</a>
+    </div>
+    {{/staff}}
+    {{#staff}}
+    <div class="form-group d-flex justify-content-center">
+        <a href="/home">Go to homepage</a>
+    </div>
+    {{/staff}}
+</body>
+
+</html>

@@ -45,6 +45,7 @@ https://webdev2coursework2.herokuapp.com/
 - [x] Create the edit lunch function
 - [x] Create the edit dinner function
 - [x] Add delete dish function
+- [x] Add error pages for error 404 and error 500
 - [ ] Allow staff to upload images when creating a dish
 - [ ] Images of the dish should appear on the menus page(dinner or lunch)
 - [ ] Images of the dish should appear on the dish details page

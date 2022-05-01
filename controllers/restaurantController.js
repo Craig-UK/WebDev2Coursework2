@@ -1,5 +1,8 @@
 const restaurantDAO = require("../models/restaurantModel");
 const userDao = require("../models/userModel.js");
+const fs = require('fs');
+const multer = require('multer');
+const path = require('path');
 // const puppeteer = require('puppeteer');
 // const jsdom = require("jsdom");
 // const {
@@ -9,7 +12,6 @@ const userDao = require("../models/userModel.js");
 //     document
 // } = jsdom;
 // var http = require('http');
-// const fs = require('fs');
 // const cheerio = require('cheerio');
 
 const db = new restaurantDAO('dish.db');
@@ -368,15 +370,68 @@ exports.loginPage = function (req, res) {
     });
 };
 
+
+// const upload = multer({
+//     dest: path.join(__dirname, "../temp"),
+// });
+
 exports.post_new_dish = function (req, res) {
     console.log("Processing new dish.");
+    console.log("Name: ", req.body.name)
+    console.log("Ingredients: ", req.body.ingredients)
+    console.log("Allergy: ", req.body.allergyInfo)
+    console.log("Type: ", req.body.dishType)
+    console.log("Image: ", req.body.image)
+    console.log("Menu: ", req.body.menu)
+    console.log("Price: ", req.body.price)
+    console.log("Description: ", req.body.description)
     if (!req.body.name || !req.body.ingredients || !req.body.allergyInfo || !req.body.dishType ||
         !req.body.image || !req.body.menu || !req.body.price || !req.body.description) {
         res.status(400).send("All fields are required.");
         return;
     }
+
+    // upload.single("image"),
+    //     (req, res) => {
+    //         console.log("Started uploading image!");
+    //         console.log("File Information: ");
+    //         const tempPath = req.file.path;
+    //         console.log("File Temporary Path: ", tempPath);
+    //         const filename = req.file.originalname;
+    //         console.log("Filename: ", filename);
+    //         const targetPath = path.join(__dirname, "../public/images/" + filename);
+    //         console.log("File Path: ", targetPath);
+    //         if (path.extname(filename).toLowerCase() === ".jpg") {
+    //             console.log("Extension of file: ", path.extname(filename));
+    //             fs.rename(tempPath, targetPath, (err) => {
+    //                 if (err) { 
+    //                     console.log(err);
+    //                     return res.status(500).contentType("text/plain").end("Something went wrong");
+    //                 }
+    //                 console.log("Image successfully uploaded! File information below.");
+    //                 console.log("File Information: ");
+    //                 console.log("File Temporary Path: ", tempPath);
+    //                 console.log("Filename: ", filename);
+    //                 console.log("File Path: ", targetPath);
+    //                 console.log("Redirecting...");
+    //                 res.status(200).render("home", {
+    //                     images: filename,
+    //                 });
+    //             });
+    //         } else {
+    //             fs.unlink(tempPath, (err) => {
+    //                 if (err) return handleError(err, res);
+    //                 res
+    //                     .status(403)
+    //                     .contentType("text/plain")
+    //                     .end("Only .jpg files are allowed!");
+    //             });
+    //         }
+    // }
+
     db.addNewDish(req.body.name, req.body.ingredients, req.body.allergyInfo, req.body.dishType, req.body.image,
         req.body.menu, req.body.price, req.body.description);
+
     res.redirect("/home");
 }
 
@@ -387,6 +442,7 @@ exports.post_edit_dish = function (req, res) {
         res.status(400).send("All fields are required.");
         return;
     }
+    
     db.editDish(req.body.name, req.body.ingredients, req.body.allergyInfo, req.body.dishType, req.body.image,
         req.body.menu, req.body.price, req.body.description);
     res.redirect("/home");
@@ -398,6 +454,45 @@ exports.deleteDish = function (req, res) {
     res.redirect("/home")
 }
 
+exports.uploadImage = function (req, res) {
+    upload.single("image"),
+    (req, res) => {
+        console.log("Started uploading image!");
+        console.log("File Information: ");
+        const tempPath = req.file.path;
+        console.log("File Temporary Path: ", tempPath);
+        const filename = req.file.originalname;
+        console.log("Filename: ", filename);
+        const targetPath = path.join(__dirname, "../public/images/" + filename);
+        console.log("File Path: ", targetPath);
+        if (path.extname(filename).toLowerCase() === ".jpg") {
+            console.log("Extension of file: ", path.extname(filename));
+            fs.rename(tempPath, targetPath, (err) => {
+                if (err) { 
+                    console.log(err);
+                    return res.status(500).contentType("text/plain").end("Something went wrong");
+                }
+                console.log("Image successfully uploaded! File information below.");
+                console.log("File Information: ");
+                console.log("File Temporary Path: ", tempPath);
+                console.log("Filename: ", filename);
+                console.log("File Path: ", targetPath);
+                console.log("Redirecting...");
+                res.status(200).render("home", {
+                    images: filename,
+                });
+            });
+        } else {
+            fs.unlink(tempPath, (err) => {
+                if (err) return handleError(err, res);
+                res
+                    .status(403)
+                    .contentType("text/plain")
+                    .end("Only .jpg files are allowed!");
+            });
+        }
+    }
+}
 /*
 FUNCTIONS TO HANDLE LOGIN/LOGOUT FUNCTIONS
 */
