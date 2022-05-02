@@ -3,26 +3,27 @@ const userDao = require("../models/userModel.js");
 const fs = require('fs');
 const multer = require('multer');
 const path = require('path');
-// const puppeteer = require('puppeteer');
-// const jsdom = require("jsdom");
-// const {
-//     JSDOM
-// } = jsdom;
-// const {
-//     document
-// } = jsdom;
-// var http = require('http');
-// const cheerio = require('cheerio');
 
 const db = new restaurantDAO('dish.db');
 // db.init();
+
+const imageDirPath = path.join(__dirname, "../public/images");
 
 /* 
 NOT LOGGED IN STAFF
 */
 exports.homePage = function (req, res) {
-    res.render("home", {
-        title: "Restaurant - Home"
+    db.getFeaturedDish()
+      .then((featured) => {
+        console.log("Featured dish: ", featured);
+        res.render("home", {
+            title: "Restaurant - Home",
+            featured: featured
+        });
+      })
+      .catch((err) => {
+        console.log("Error: ");
+        console.log(JSON.stringify(err));
     });
 };
 
@@ -33,79 +34,7 @@ exports.aboutPage = function (req, res) {
 };
 
 exports.dinnerMenu = function (req, res) {
-    // const dom = new JSDOM('dinnerMenu.mustache').window
-    // let dishType = document.querySelector('#dishType');
-    // console.log(dishType.html());
-    // if (dishType == 'Starter') {
-    //     dishType = 'Starter';
-    //     console.log(dishType);
-    // }
-    // if (dishType == 'Main Course') {
-    //     dishType = 'Main Course';
-    // }
-    // let dishType = req.body.dishType;
-    // db.getDinnerDishes(dishType)
-    //     .then((dishes) => {
-    //         res.render("dinnerMenu", {
-    //             title: "Restaurant - Dinner Menu",
-    //             dishes: dishes,
-    //         });
-    //     })
-    //     .catch((err) => {
-    //         console.log("An Error Occurred: ");
-    //         console.log(JSON.stringify(err));
-    //     });
-    // let dishType = {
-    //     dishType: "Starter",
-    //     dishType: "Main Course"
-    // };
-    // let dishType = "Starter";
-    // let dishType = "Main Course";
-    // db.getDinnerDishes()
-    //     .then((starter) => {
-    //         res.render("dinnerMenu", {
-    //             title: "Restaurant - Dinner Menu",
-    //             starter: starter,
-    //         });
-    //     })
-    //     .catch((err) => {
-    //         console.log("An Error Occurred: ");
-    //         console.log(JSON.stringify(err));
-    //     });
-    // db.getDinnerDishes(dishType)
-    //     .then((main) => {
-    //         res.render("dinnerMenu", {
-    //             title: "Restaurant - Dinner Menu",
-    //             main: main,
-    //         });
-    //     })
-    //     .catch((err) => {
-    //         console.log("An Error Occurred: ");
-    //         console.log(JSON.stringify(err));
-    //     });
-    // db.getDinnerDishes(dishType)
-    //     .then((starter, main) => {
-    //         res.render("dinnerMenu", {
-    //             title: "Restaurant - Dinner Menu",
-    //             starter: starter,
-    //             main: main
-    //         });
-    //     })
-    //     .catch((err) => {
-    //         console.log("An Error Occurred: ");
-    //         console.log(JSON.stringify(err));
-    //     });
-    // db.getDinnerDishes()
-    //     .then((dishes) => {
-    //         res.render("dinnerMenu", {
-    //             title: "Restaurant - Dinner Menu",
-    //             dishes: dishes,
-    //         });
-    //     })
-    //     .catch((err) => {
-    //         console.log("An Error Occurred: ");
-    //         console.log(JSON.stringify(err));
-    //     });
+    let files = fs.readdirSync(imageDirPath);
     db.db.find({'menu':'Dinner'}, function(err,dish) {
         const types = {
             starter: [],
@@ -137,28 +66,15 @@ exports.dinnerMenu = function (req, res) {
             });
             res.render('dinnerMenu', {
                 title: "Restaurant - Dinner Menu",
-                types: types
+                types: types,
+                images: files
             });
         }
     });
 };
 
-// exports.starterDinner = function (req, res) {
-//     db.getStarterDinnerDishes()
-//       .then((starter) => {
-//         res.render("dinnerMenu", {
-//             title: "Restaurant - Dinner Menu",
-//             starter: starter,
-//         });
-//       })
-//       .catch((err) => {
-//         console.log("An Error Occurred: ");
-//         console.log(JSON.stringify(err));
-//     });
-// }
-
 exports.getSingleDish = function (req, res) {
-    let dish = req.params.name;
+    let dish = req.params._id;
     db.getSingleDish(dish)
         .then((dishes) => {
             console.log("Processing", dish);
@@ -216,9 +132,18 @@ exports.lunchMenu = function (req, res) {
 LOGGED IN STAFF
 */
 exports.homePageLoggedIn = function (req, res) {
-    res.render("home", {
-        title: "Restaurant - Home",
-        staff: "staff"
+    db.getFeaturedDish()
+      .then((featured) => {
+        console.log("Featured dish: ", featured);
+        res.render("home", {
+            title: "Restaurant - Home",
+            featured: featured,
+            staff: "staff"
+        });
+      })
+      .catch((err) => {
+        console.log("Error: ");
+        console.log(JSON.stringify(err));
     });
 };
 
@@ -340,7 +265,7 @@ exports.editLunch = function (req, res) {
 }
 
 exports.editDish = function (req, res) {
-    let dish = req.params.name;
+    let dish = req.params._id;
     db.editDishPage(dish)
         .then((dishes) => {
             console.log("Processing", dish);
@@ -371,9 +296,9 @@ exports.loginPage = function (req, res) {
 };
 
 
-// const upload = multer({
-//     dest: path.join(__dirname, "../temp"),
-// });
+const upload = multer({
+    dest: path.join(__dirname, "../temp"),
+});
 
 exports.post_new_dish = function (req, res) {
     console.log("Processing new dish.");
@@ -387,12 +312,17 @@ exports.post_new_dish = function (req, res) {
     console.log("Description: ", req.body.description)
     if (!req.body.name || !req.body.ingredients || !req.body.allergyInfo || !req.body.dishType ||
         !req.body.image || !req.body.menu || !req.body.price || !req.body.description) {
-        res.status(400).send("All fields are required.");
+        res.status(400).render("errors/400", {
+            title: "Error: 400",
+            content: "All fields are Required!"
+        });
         return;
     }
+    
+    // db.uploadImage(req.body.image);
 
     // upload.single("image"),
-    //     (req, res) => {
+    //     function(req, res) {
     //         console.log("Started uploading image!");
     //         console.log("File Information: ");
     //         const tempPath = req.file.path;
@@ -428,7 +358,6 @@ exports.post_new_dish = function (req, res) {
     //             });
     //         }
     // }
-
     db.addNewDish(req.body.name, req.body.ingredients, req.body.allergyInfo, req.body.dishType, req.body.image,
         req.body.menu, req.body.price, req.body.description);
 
@@ -439,7 +368,10 @@ exports.post_edit_dish = function (req, res) {
     console.log("Processing edit dish.");
     if (!req.body.name || !req.body.ingredients || !req.body.allergyInfo || !req.body.dishType ||
         !req.body.image || !req.body.menu || !req.body.price || !req.body.description) {
-        res.status(400).send("All fields are required.");
+            res.status(400).render("errors/400", {
+                title: "Error: 400",
+                content: "All fields are Required!"
+            });
         return;
     }
     
@@ -454,55 +386,43 @@ exports.deleteDish = function (req, res) {
     res.redirect("/home")
 }
 
-exports.uploadImage = function (req, res) {
-    upload.single("image"),
-    (req, res) => {
-        console.log("Started uploading image!");
-        console.log("File Information: ");
-        const tempPath = req.file.path;
-        console.log("File Temporary Path: ", tempPath);
-        const filename = req.file.originalname;
-        console.log("Filename: ", filename);
-        const targetPath = path.join(__dirname, "../public/images/" + filename);
-        console.log("File Path: ", targetPath);
-        if (path.extname(filename).toLowerCase() === ".jpg") {
-            console.log("Extension of file: ", path.extname(filename));
-            fs.rename(tempPath, targetPath, (err) => {
-                if (err) { 
-                    console.log(err);
-                    return res.status(500).contentType("text/plain").end("Something went wrong");
-                }
-                console.log("Image successfully uploaded! File information below.");
-                console.log("File Information: ");
-                console.log("File Temporary Path: ", tempPath);
-                console.log("Filename: ", filename);
-                console.log("File Path: ", targetPath);
-                console.log("Redirecting...");
-                res.status(200).render("home", {
-                    images: filename,
-                });
-            });
-        } else {
-            fs.unlink(tempPath, (err) => {
-                if (err) return handleError(err, res);
-                res
-                    .status(403)
-                    .contentType("text/plain")
-                    .end("Only .jpg files are allowed!");
-            });
-        }
-    }
-}
-/*
-FUNCTIONS TO HANDLE LOGIN/LOGOUT FUNCTIONS
-*/
-exports.handle_login = function (req, res) {
-    res.render("home", {
-        title: "Restaurant - Home",
-        staff: "staff"
-    });
-};
-
-exports.logout = function (req, res) {
-    res.clearCookie("jwt").status(200).redirect("/");
-};
+// exports.uploadImage = function (req, res) {
+//     console.log("Upload started!")
+//     upload.single("image"),
+//     (req, res) => {
+//         console.log("Started uploading image!");
+//         console.log("File Information: ");
+//         const tempPath = req.file.path;
+//         console.log("File Temporary Path: ", tempPath);
+//         const filename = req.file.originalname;
+//         console.log("Filename: ", filename);
+//         const targetPath = path.join(__dirname, "../public/images/" + filename);
+//         console.log("File Path: ", targetPath);
+//         if (path.extname(filename).toLowerCase() === ".jpg") {
+//             console.log("Extension of file: ", path.extname(filename));
+//             fs.rename(tempPath, targetPath, (err) => {
+//                 if (err) { 
+//                     console.log(err);
+//                     return res.status(500).contentType("text/plain").end("Something went wrong");
+//                 }
+//                 console.log("Image successfully uploaded! File information below.");
+//                 console.log("File Information: ");
+//                 console.log("File Temporary Path: ", tempPath);
+//                 console.log("Filename: ", filename);
+//                 console.log("File Path: ", targetPath);
+//                 console.log("Redirecting...");
+//                 res.status(200).render("home", {
+//                     images: filename,
+//                 });
+//             });
+//         } else {
+//             fs.unlink(tempPath, (err) => {
+//                 if (err) return handleError(err, res);
+//                 res
+//                     .status(403)
+//                     .contentType("text/plain")
+//                     .end("Only .jpg files are allowed!");
+//             });
+//         }
+//     }
+// }

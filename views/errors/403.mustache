@@ -6,10 +6,13 @@
 
 <body>
     {{>nav}}
-    <h1 class="text-center">Error: 500 Internal Server Error.</h1>
+    <h1 class="text-center">Error: 403 Unauthorised Action.</h1>
     {{^staff}}
     <div class="form-group d-flex justify-content-center">
         <a href="/">Go to Home</a>
+    </div>
+    <div class="form-group d-flex justify-content-center">
+        <a href="/login">Go to Login</a>
     </div>
     {{/staff}}
     {{#staff}}

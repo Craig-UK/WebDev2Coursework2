@@ -1,51 +1,148 @@
 const express = require('express');
 const router = express.Router();
-const controller = require('../controllers/restaurantController');
+const pages = require('../controllers/pagesController');
+const staff = require('../controllers/staffController')
 const errController = require('../controllers/errorsController');
 const fs = require('fs');
 const multer = require('multer');
 const path = require('path')
 
 const { login, verify } = require('../auth/auth');
-const { upload } = require('../auth/imageUpload');
+// const { upload } = require('../auth/imageUpload');
 
-router.get("/", controller.homePage);
-router.get("/about", controller.aboutPage);
-router.get("/dinner", controller.dinnerMenu);
-router.get("/lunch", controller.lunchMenu);
-router.get("/dish/:name", controller.getSingleDish);
 
-router.get("/login", controller.loginPage);
-router.post("/login", login, controller.handle_login);
+const upload = multer({
+    dest: path.join(__dirname, "../temp"),
+});
+
+router.get("/", pages.homePage);
+router.get("/about", pages.aboutPage);
+router.get("/dinner", pages.dinnerMenu);
+router.get("/lunch", pages.lunchMenu);
+router.get("/dish/:_id", pages.getSingleDish);
+
+router.get("/login", pages.loginPage);
+router.post("/login", login, staff.handle_login);
 
 /*
 LOGGED IN STAFF
 */
-router.get("/home", verify, controller.homePageLoggedIn);
-router.get("/aboutus", verify, controller.aboutPageLoggedIn);
-router.get("/dinnermenu", verify, controller.dinnerMenuLoggedIn);
-router.get("/lunchmenu", verify, controller.lunchMenuLoggedIn);
-router.get("/editdinner", verify, controller.editDinner);
-router.get("/editlunch", verify, controller.editLunch);
-router.get("/dish/edit/:name", verify, controller.editDish);
-router.post("/dish/edit/:name", verify, controller.post_edit_dish);
-router.get("/dish/delete/:_id", verify, controller.deleteDish);
-router.get("/add", verify, controller.addNewDish);
-router.post("/add", verify, upload, controller.post_new_dish);
-router.get("/logout", controller.logout);
+router.get("/home", verify, pages.homePageLoggedIn);
+router.get("/aboutus", verify, pages.aboutPageLoggedIn);
+router.get("/dinnermenu", verify, pages.dinnerMenuLoggedIn);
+router.get("/lunchmenu", verify, pages.lunchMenuLoggedIn);
+router.get("/editdinner", verify, pages.editDinner);
+router.get("/editlunch", verify, pages.editLunch);
+router.get("/dish/edit/:_id", verify, pages.editDish);
+router.post("/dish/edit/:_id", verify, pages.post_edit_dish);
+router.get("/dish/delete/:_id", verify, pages.deleteDish);
+router.get("/add", verify, pages.addNewDish);
+router.post("/add", verify, pages.post_new_dish);
+// router.post("/add", upload.single("image"),
+// (req, res) => {
+//     console.log("Started uploading image!");
+//     console.log("File Information: ");
+//     const tempPath = req.file.path;
+//     console.log("File Temporary Path: ", tempPath);
+//     const filename = req.file.originalname;
+//     console.log("Filename: ", filename);
+//     const targetPath = path.join(__dirname, "../public/images/" + filename);
+//     console.log("File Path: ", targetPath);
+//     if (path.extname(filename).toLowerCase() === ".jpg") {
+//         console.log("Extension of file: ", path.extname(filename));
+//         fs.rename(tempPath, targetPath, (err) => {
+//             if (err) { 
+//                 console.log(err);
+//                 return res.status(500).contentType("text/plain").end("Something went wrong");
+//             }
+//             console.log("Image successfully uploaded! File information below.");
+//             console.log("File Information: ");
+//             console.log("File Temporary Path: ", tempPath);
+//             console.log("Filename: ", filename);
+//             console.log("File Path: ", targetPath);
+//             console.log("Redirecting...");
+//             res.status(200).render("home", {
+//                 images: filename,
+//             });
+//         });
+//     } else {
+//         fs.unlink(tempPath, (err) => {
+//             if (err) return handleError(err, res);
+//             res
+//                 .status(403)
+//                 .contentType("text/plain")
+//                 .end("Only .jpg files are allowed!");
+//         });
+//     }
+// }, verify, controller.post_new_dish);
+router.post("/upload", 
+    upload.single("image"),
+    (req, res) => {
+        console.log("Started uploading image!");
+        console.log("File Information: ");
+        const tempPath = req.file.path;
+        console.log("File Temporary Path: ", tempPath);
+        const filename = req.file.originalname;
+        console.log("Filename: ", filename);
+        const targetPath = path.join(__dirname, "../public/images/" + filename);
+        console.log("File Path: ", targetPath);
+        if (path.extname(filename).toLowerCase() === ".jpg") {
+            console.log("Extension of file: ", path.extname(filename));
+            fs.rename(tempPath, targetPath, (err) => {
+                if (err) { 
+                    console.log(err);
+                    return res.status(500).contentType("text/plain").end("Something went wrong");
+                }
+                console.log("Image successfully uploaded! File information below.");
+                console.log("File Information: ");
+                console.log("File Temporary Path: ", tempPath);
+                console.log("Filename: ", filename);
+                console.log("File Path: ", targetPath);
+                console.log("Redirecting...");
+                res.status(200).render("home", {
+                    images: filename,
+                });
+            });
+        } else {
+            fs.unlink(tempPath, (err) => {
+                if (err) return handleError(err, res);
+                res
+                    .status(403)
+                    .contentType("text/plain")
+                    .end("Only .jpg files are allowed!");
+            });
+        }
+    });
+router.get("/logout", staff.logout);
 
 /*
 ERROR PAGES
 */
+router.get("/400", errController.error400);
+router.get("/400Error", verify, errController.error400LoggedIn);
+router.get("/401", errController.error401);
+router.get("/401Error", verify, errController.error401LoggedIn);
+router.get("/403", errController.error403);
+router.get("/403Error", verify, errController.error403LoggedIn);
 router.get("/404", errController.error404);
 router.get("/404Error", verify, errController.error404LoggedIn);
 router.get("/500", errController.error500);
 router.get("/500Error", verify, errController.error500LoggedIn);
 
-// router.use(function(req, res) {
-//     res.status(403);
-//     res.send("Unauthorised action.");
-// });
+router.use(function(req, res) {
+    res.status(400);
+    res.redirect("/400")
+});
+
+router.use(function(req, res) {
+    res.status(401);
+    res.redirect("/401")
+});
+
+router.use(function(req, res) {
+    res.status(403);
+    res.redirect("/403")
+});
 
 router.use(function(req, res) {
     res.status(404);

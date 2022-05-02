@@ -31,13 +31,13 @@ exports.login = function (req, res, next) {
 exports.verify = function (req, res, next) {
     let accessToken = req.cookies.jwt;
     if(!accessToken) {
-        return res.status(403).send();
+        return res.status(403).redirect("/403");
     }
     let payload;
     try {
         payload = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
         next();
     } catch(e) {
-        res.status(401).send();
+        res.status(401).redirect("/401");
     }
 }

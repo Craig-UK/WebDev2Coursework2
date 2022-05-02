@@ -1,4 +1,7 @@
 const nedb = require('nedb');
+const fs = require('fs');
+const multer = require('multer');
+const path = require('path');
 
 class Restaurant {
     constructor(dbFilePath) {
@@ -29,7 +32,8 @@ class Restaurant {
             image: "{imageURL}",
             menu: "Lunch",
             price: "3.50",
-            description: "Delicious French Toast served with Maple Syrup"
+            description: "Delicious French Toast served with Maple Syrup",
+            featured: true
         });
         this.db.insert({
             name: "Lasagna",
@@ -46,7 +50,8 @@ class Restaurant {
             image: "{imageURL}",
             menu: "Dinner",
             price: "3.50",
-            description: "Delicious French Toast served with Maple Syrup"
+            description: "Delicious French Toast served with Maple Syrup",
+            featured: false
         });
         this.db.insert({
             name: "Test",
@@ -63,149 +68,11 @@ class Restaurant {
             image: "{imageURL}",
             menu: "Dinner",
             price: "3.50",
-            description: "Delicious French Toast served with Maple Syrup"
+            description: "Delicious French Toast served with Maple Syrup",
+            featured: false
         });
         return this;
     }
-
-    // getStarterDinnerDishes() {
-    //     return new Promise((resolve, reject) => {
-    //         this.db.find({
-    //             dishType: "Starter",
-    //             menu: "Dinner"
-    //         }, function (err, dishes) {
-    //             if (err) {
-    //                 reject(err);
-    //             } else {
-    //                 resolve(dishes);
-    //             }
-    //             console.log("The database contains these dishes: ", dishes);
-    //         });
-    //     });
-    // }
-
-    // getDinnerDishes(dishType) {
-    //     return new Promise((resolve, reject) => {
-    //         this.db.find({
-    //             menu: "Dinner",
-    //             'dishType': dishType
-    //         }, function (err, dishes) {
-    //             if (err) {
-    //                 reject(err);
-    //             } else {
-    //                 resolve(dishes);
-    //                 console.log('getDinnerDishes returns: ', dishes);
-    //             }
-    //         });
-    //     });
-    // }
-
-    // getDinnerDishes(dishType) {
-    //     var dish = {
-    //         dishType: dishType
-    //     }
-    //     console.log("Dish", dish);
-    //     if(dish.dishType == "Starter") {
-    //         return new Promise((resolve, reject) => {
-    //             this.db.find({
-    //                 menu: "Dinner",
-    //                 dishType: "Starter"
-    //             }, function(err, starter) {
-    //                 if(err) {
-    //                     reject(err);
-    //                 } else {
-    //                     resolve(starter);
-    //                     console.log("Starters returned: ", starter);
-    //                 }
-    //             })
-    //         })
-    //     }
-
-    //     if(dish.dishType == "Main Course") {
-    //         return new Promise((resolve, reject) => {
-    //             this.db.find({
-    //                 menu: "Dinner",
-    //                 dishType: "Main Course"
-    //             }, function(err, main) {
-    //                 if(err) {
-    //                     reject(err);
-    //                 } else {
-    //                     resolve(main);
-    //                     console.log("Starters returned: ", main);
-    //                 }
-    //             })
-    //         })
-    //     }
-    // }
-
-    getDinnerDishes() {
-        return new Promise((resolve, reject) => {
-            // this.db.find({
-            //     menu: "Dinner",
-            // }, function (err, dishes) {
-            //     if (err) {
-            //         reject(err);
-            //     } else {
-            //         resolve(dishes);
-            //         console.log('getDinnerDishes returns: ', dishes);
-            //     }
-            // });
-
-            this.db.find({
-                menu: "Dinner",
-                dishType: "Starter"
-            }, function (err, starter) {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(starter);
-                    console.log('Starter', starter);
-                }
-            });
-
-            this.db.find({
-                menu: "Dinner",
-                dishType: "Main Course"
-            }, function (err, main) {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(main);
-                    console.log('Main Course', main);
-                }
-            });
-
-            //  this.db.find(dishes => {
-            //      const dinner = {
-            //          starter: { dishes: [] }
-            //      }
-            // }, function (err, dish) {
-            //     dishes.forEach(dish => {
-            //         if(dish.dishType === "Starter") {
-            //             dinner.starter.dishes.push(dish);
-            //         }
-            //     });
-            // });
-
-            
-        });
-    }
-
-    // getDinnerDishes() {
-    //     return new Promise((resolve, reject) => {
-    //         this.db.find({
-    //             menu: "Dinner",
-    //             dishType: "Starter"
-    //         }, function (err, starter) {
-    //             if (err) {
-    //                 reject(err);
-    //             } else {
-    //                 resolve(starter);
-    //                 console.log('getDinnerDishes returns: ', starter);
-    //             }
-    //         });
-    //     });
-    // }
 
     getAllDinnerDishes() {
         return new Promise((resolve, reject) => {
@@ -237,16 +104,16 @@ class Restaurant {
         });
     }
 
-    getLunchDishes() {
+    getFeaturedDish() {
         return new Promise((resolve, reject) => {
             this.db.find({
-                menu: "Lunch"
+                featured: true
             }, function (err, dishes) {
                 if (err) {
                     reject(err);
                 } else {
                     resolve(dishes);
-                    console.log('getAllLunchDishes returns: ', dishes);
+                    console.log('Featured Dish is: ', dishes);
                 }
             });
         });
@@ -272,6 +139,52 @@ class Restaurant {
             }
         });
     }
+
+    // uploadImage(image) {
+    //     const upload = multer({
+    //         dest: path.join(__dirname, "../temp"),
+    //     });
+    //     console.log(__dirname, __filename);
+    //     console.log(`Upload started for ${image}!`)
+    //     upload.single("image"),
+    //     console.log("Inside upload.single");
+    //     (req, res) => {
+    //         console.log("Started uploading image!");
+    //         console.log("File Information: ");
+    //         const tempPath = req.file.path;
+    //         console.log("File Temporary Path: ", tempPath);
+    //         const filename = req.file.originalname;
+    //         console.log("Filename: ", filename);
+    //         const targetPath = path.join(__dirname, "../public/images/" + filename);
+    //         console.log("File Path: ", targetPath);
+    //         if (path.extname(filename).toLowerCase() === ".jpg") {
+    //             console.log("Extension of file: ", path.extname(filename));
+    //             fs.rename(tempPath, targetPath, (err) => {
+    //                 if (err) { 
+    //                     console.log(err);
+    //                     return res.status(500).contentType("text/plain").end("Something went wrong");
+    //                 }
+    //                 console.log("Image successfully uploaded! File information below.");
+    //                 console.log("File Information: ");
+    //                 console.log("File Temporary Path: ", tempPath);
+    //                 console.log("Filename: ", filename);
+    //                 console.log("File Path: ", targetPath);
+    //                 console.log("Redirecting...");
+    //                 res.status(200).render("home", {
+    //                     images: filename,
+    //                 });
+    //             });
+    //         } else {
+    //             fs.unlink(tempPath, (err) => {
+    //                 if (err) return handleError(err, res);
+    //                 res
+    //                     .status(403)
+    //                     .contentType("text/plain")
+    //                     .end("Only .jpg files are allowed!");
+    //             });
+    //         }
+    //     }
+    // }
 
     editDish(name, ingredients, allergyInfo, dishType, image, menu, price, description) {
         console.log("Started updating dish.", name);
@@ -299,10 +212,10 @@ class Restaurant {
         });
     }
 
-    editDishPage(menuName) {
+    editDishPage(id) {
         return new Promise((resolve, reject) => {
             this.db.find({
-                'name': menuName
+                '_id': id
             }, function (err, dishes) {
                 if (err) {
                     reject(err);
@@ -314,10 +227,10 @@ class Restaurant {
         });
     }
 
-    getSingleDish(menuName) {
+    getSingleDish(id) {
         return new Promise((resolve, reject) => {
             this.db.find({
-                'name': menuName
+                '_id': id
             }, function (err, dishes) {
                 if (err) {
                     reject(err);
