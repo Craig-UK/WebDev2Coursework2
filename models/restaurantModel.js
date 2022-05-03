@@ -1,7 +1,5 @@
 const nedb = require('nedb');
 const fs = require('fs');
-const multer = require('multer');
-const path = require('path');
 
 class Restaurant {
     constructor(dbFilePath) {

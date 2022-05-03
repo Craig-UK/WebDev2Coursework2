@@ -7,6 +7,9 @@
 <body>
     {{>nav}}
     <h1 class="text-center">Error: 403 Unauthorised Action.</h1>
+    {{#content}}
+        <p class="text-center">{{content}}</p>
+    {{/content}}
     {{^staff}}
     <div class="form-group d-flex justify-content-center">
         <a href="/">Go to Home</a>

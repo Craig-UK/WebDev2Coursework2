@@ -50,7 +50,7 @@
     <p class="text-center"> No dishes </p>
     {{/types.main}}
     <h2 class="text-center">Desserts</h2>
-    {{#types.desserts}}
+    {{#types.dessert}}
     <div class="card mb-3" style="max-width: 540px;">
         <div class="row g-0">
             <div class="col-md-4">
@@ -66,10 +66,10 @@
             </div>
         </div>
     </div>
-    {{/types.desserts}}
-    {{^types.desserts}}
+    {{/types.dessert}}
+    {{^types.dessert}}
     <p class="text-center"> No dishes </p>
-    {{/types.desserts}}
+    {{/types.dessert}}
     <h2 class="text-center">Cold Drinks</h2>
     {{#types.coldDrink}}
     <div class="card mb-3" style="max-width: 540px;">

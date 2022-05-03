@@ -314,63 +314,23 @@ exports.post_new_dish = function (req, res) {
     console.log("Ingredients: ", req.body.ingredients)
     console.log("Allergy: ", req.body.allergyInfo)
     console.log("Type: ", req.body.dishType)
-    console.log("Image: ", req.body.image)
+    console.log("Image: ", req.file)
     console.log("Menu: ", req.body.menu)
     console.log("Price: ", req.body.price)
     console.log("Description: ", req.body.description)
     console.log("Featured Dish?: ", featuredDish)
 
     if (!req.body.name || !req.body.ingredients || !req.body.allergyInfo || !req.body.dishType ||
-        !req.body.image || !req.body.menu || !req.body.price || !req.body.description) {
+        !req.file || !req.body.menu || !req.body.price || !req.body.description) {
         res.status(400).render("errors/400", {
             title: "Error: 400",
             content: "All fields are Required!"
         });
         return;
     }
-    
-    // db.uploadImage(req.body.image);
 
-    // upload.single("image"),
-    //     function(req, res) {
-    //         console.log("Started uploading image!");
-    //         console.log("File Information: ");
-    //         const tempPath = req.file.path;
-    //         console.log("File Temporary Path: ", tempPath);
-    //         const filename = req.file.originalname;
-    //         console.log("Filename: ", filename);
-    //         const targetPath = path.join(__dirname, "../public/images/" + filename);
-    //         console.log("File Path: ", targetPath);
-    //         if (path.extname(filename).toLowerCase() === ".jpg") {
-    //             console.log("Extension of file: ", path.extname(filename));
-    //             fs.rename(tempPath, targetPath, (err) => {
-    //                 if (err) { 
-    //                     console.log(err);
-    //                     return res.status(500).contentType("text/plain").end("Something went wrong");
-    //                 }
-    //                 console.log("Image successfully uploaded! File information below.");
-    //                 console.log("File Information: ");
-    //                 console.log("File Temporary Path: ", tempPath);
-    //                 console.log("Filename: ", filename);
-    //                 console.log("File Path: ", targetPath);
-    //                 console.log("Redirecting...");
-    //                 res.status(200).render("home", {
-    //                     images: filename,
-    //                 });
-    //             });
-    //         } else {
-    //             fs.unlink(tempPath, (err) => {
-    //                 if (err) return handleError(err, res);
-    //                 res
-    //                     .status(403)
-    //                     .contentType("text/plain")
-    //                     .end("Only .jpg files are allowed!");
-    //             });
-    //         }
-    // }
-    
-    db.addNewDish(req.body.name, req.body.ingredients, req.body.allergyInfo, req.body.dishType, req.body.image,
-        req.body.menu, req.body.price, req.body.description, featuredDish);
+    db.addNewDish(req.body.name, req.body.ingredients, req.body.allergyInfo, req.body.dishType, req.file.originalname,
+                            req.body.menu, req.body.price, req.body.description, featuredDish);
 
     res.redirect("/home");
 }
