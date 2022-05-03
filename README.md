@@ -68,6 +68,7 @@ https://webdev2coursework2.herokuapp.com/
 - [x] Add delete dish function
 - [x] Add error pages
 - [x] Add featured dish function
+- [x] Allow staff to make a dish a "featured dish" when creating a dish or editing a dish
 - [x] Display featured dish on the home page
 - [ ] Allow staff to upload images when creating a dish
 - [ ] Images of the dish should appear on the menus page(dinner or lunch)
