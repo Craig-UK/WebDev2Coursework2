@@ -7,10 +7,32 @@
 <body>
     {{>nav}}
     <h1 class="text-center">Home</h1>
+    <div class="row">
+        <div class="col-md-4">
+            <img src="images/restaurant.jpg" class="img-fluid" alt="...">
+        </div>
+    </div>
     <h1 class="text-center">About the Restaurant</h1>
     <h1 class="text-center">Featured Dish</h1>
     {{#featured}}
-        <h2 class="text-center">{{name}}</h2>
+    <div class="card mb-3" style="max-width: 540px;">
+        <div class="row">
+            <div class="col-md-4">
+                <img src="images/{{image}}" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title"><a href="/dish/{{_id}}">{{name}}</a></h5>
+                    <p class="card-text">
+                        Ingredients: {{ingredients}}
+                    </p>
+                    <p class="card-text">
+                        Description: {{description}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
     {{/featured}}
 </body>
 

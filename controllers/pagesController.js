@@ -302,6 +302,14 @@ const upload = multer({
 
 exports.post_new_dish = function (req, res) {
     console.log("Processing new dish.");
+
+    let featuredDish = req.body['featured'];
+    if(featuredDish) {
+        featuredDish = true;
+    } else {
+        featuredDish = false;
+    }
+
     console.log("Name: ", req.body.name)
     console.log("Ingredients: ", req.body.ingredients)
     console.log("Allergy: ", req.body.allergyInfo)
@@ -310,6 +318,8 @@ exports.post_new_dish = function (req, res) {
     console.log("Menu: ", req.body.menu)
     console.log("Price: ", req.body.price)
     console.log("Description: ", req.body.description)
+    console.log("Featured Dish?: ", featuredDish)
+
     if (!req.body.name || !req.body.ingredients || !req.body.allergyInfo || !req.body.dishType ||
         !req.body.image || !req.body.menu || !req.body.price || !req.body.description) {
         res.status(400).render("errors/400", {
@@ -358,14 +368,25 @@ exports.post_new_dish = function (req, res) {
     //             });
     //         }
     // }
+    
     db.addNewDish(req.body.name, req.body.ingredients, req.body.allergyInfo, req.body.dishType, req.body.image,
-        req.body.menu, req.body.price, req.body.description);
+        req.body.menu, req.body.price, req.body.description, featuredDish);
 
     res.redirect("/home");
 }
 
 exports.post_edit_dish = function (req, res) {
     console.log("Processing edit dish.");
+    
+    let id = req.params._id;
+
+    let featuredDish = req.body['featured'];
+    if(featuredDish) {
+        featuredDish = true;
+    } else {
+        featuredDish = false;
+    }
+
     if (!req.body.name || !req.body.ingredients || !req.body.allergyInfo || !req.body.dishType ||
         !req.body.image || !req.body.menu || !req.body.price || !req.body.description) {
             res.status(400).render("errors/400", {
@@ -375,8 +396,8 @@ exports.post_edit_dish = function (req, res) {
         return;
     }
     
-    db.editDish(req.body.name, req.body.ingredients, req.body.allergyInfo, req.body.dishType, req.body.image,
-        req.body.menu, req.body.price, req.body.description);
+    db.editDish(id, req.body.name, req.body.ingredients, req.body.allergyInfo, req.body.dishType, req.body.image,
+        req.body.menu, req.body.price, req.body.description, featuredDish);
     res.redirect("/home");
 }
 

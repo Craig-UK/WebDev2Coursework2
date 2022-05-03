@@ -5,10 +5,7 @@ const userDao = require("../models/userModel.js");
 FUNCTIONS TO HANDLE LOGIN/LOGOUT FUNCTIONS
 */
 exports.handle_login = function (req, res) {
-    res.render("home", {
-        title: "Restaurant - Home",
-        staff: "staff"
-    });
+    res.redirect("/home")
 };
 
 exports.logout = function (req, res) {

@@ -14,6 +14,7 @@ const public = path.join(__dirname,'public');
 app.use(express.static(public));
 
 app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
+app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist/js'));
 app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/'));
 app.use('/popper', express.static(__dirname + '/node_modules/popper'));
 

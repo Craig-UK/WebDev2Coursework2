@@ -106,7 +106,7 @@ class Restaurant {
 
     getFeaturedDish() {
         return new Promise((resolve, reject) => {
-            this.db.find({
+            this.db.findOne({
                 featured: true
             }, function (err, dishes) {
                 if (err) {
@@ -119,7 +119,7 @@ class Restaurant {
         });
     }
 
-    addNewDish(name, ingredients, allergyInfo, dishType, image, menu, price, description) {
+    addNewDish(name, ingredients, allergyInfo, dishType, image, menu, price, description, featured) {
         var entry = {
             name: name,
             ingredients: ingredients,
@@ -128,7 +128,8 @@ class Restaurant {
             image: image,
             menu: menu,
             price: price,
-            description: description
+            description: description,
+            featured: featured
         }
         console.log("Entry created successfully.");
         this.db.insert(entry, function (err, doc) {
@@ -186,12 +187,13 @@ class Restaurant {
     //     }
     // }
 
-    editDish(name, ingredients, allergyInfo, dishType, image, menu, price, description) {
+    editDish(id, name, ingredients, allergyInfo, dishType, image, menu, price, description, featured) {
         console.log("Started updating dish.", name);
         this.db.update({
-            'name': name
+            '_id': id
         }, {
             $set: {
+                '_id': id,
                 'name': name,
                 'ingredients': ingredients,
                 'allergyInfo': allergyInfo,
@@ -199,7 +201,8 @@ class Restaurant {
                 'image': image,
                 'menu': menu,
                 'price': price,
-                'description': description
+                'description': description,
+                'featured': featured
             }
         }, {
             multi: false
