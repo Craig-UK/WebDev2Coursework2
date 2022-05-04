@@ -37,7 +37,44 @@ router.get("/lunchmenu", verify, pages.lunchMenuLoggedIn);
 router.get("/editdinner", verify, pages.editDinner);
 router.get("/editlunch", verify, pages.editLunch);
 router.get("/dish/edit/:_id", verify, pages.editDish);
-router.post("/dish/edit/:_id", verify, pages.post_edit_dish);
+router.post("/dish/edit/:_id", upload.single("image"),
+    (req, res) => {
+        console.log("Started uploading image!");
+        console.log("File Information: ");
+        const tempPath = req.file.path;
+        console.log("File Temporary Path: ", tempPath);
+        const filename = req.file.originalname;
+        console.log("Filename: ", filename);
+        const targetPath = path.join(__dirname, "../public/images/" + filename);
+        console.log("File Path: ", targetPath);
+        if (path.extname(filename).toLowerCase() === ".jpg") {
+            console.log("Extension of file: ", path.extname(filename));
+            fs.rename(tempPath, targetPath, (err) => {
+                if (err) {
+                    console.log(err);
+                    return res.status(500).redirect("/500");
+                }
+                console.log("Image successfully uploaded! File information below.");
+                console.log("File Information: ");
+                console.log("File Temporary Path: ", tempPath);
+                console.log("Filename: ", filename);
+                console.log("File Path: ", targetPath);
+                console.log("Redirecting...");
+                pages.post_edit_dish(req, res);
+            });
+        } else {
+            fs.unlink(tempPath, (err) => {
+                if (err) {
+                    console.log(err);
+                    return res.status(500).redirect("/500");
+                }
+                res.status(403).render("errors/403", {
+                    title: "Error: 403",
+                    content: "Only .jpg files are allowed!"
+                });
+            });
+        }
+    });
 router.get("/dish/delete/:_id", verify, pages.deleteDish);
 router.get("/add", verify, pages.addNewDish);
 router.post("/add", upload.single("image"),

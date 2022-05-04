@@ -91,6 +91,7 @@ exports.getSingleDish = function (req, res) {
 };
 
 exports.lunchMenu = function (req, res) {
+    let files = fs.readdirSync(imageDirPath);
     db.db.find({'menu':'Lunch'}, function(err,dish) {
         const types = {
             starter: [],
@@ -122,7 +123,8 @@ exports.lunchMenu = function (req, res) {
             });
             res.render('lunchMenu', {
                 title: "Restaurant - Lunch Menu",
-                types: types
+                types: types,
+                images: files
             });
         }
     });
@@ -155,6 +157,7 @@ exports.aboutPageLoggedIn = function (req, res) {
 };
 
 exports.dinnerMenuLoggedIn = function (req, res) {
+    let files = fs.readdirSync(imageDirPath);
     db.db.find({'menu':'Dinner'}, function(err,dish) {
         const types = {
             starter: [],
@@ -187,13 +190,15 @@ exports.dinnerMenuLoggedIn = function (req, res) {
             res.render('dinnerMenu', {
                 title: "Restaurant - Dinner Menu",
                 types: types,
-                staff: "staff"
+                staff: "staff",
+                images: files
             });
         }
     });
 };
 
 exports.lunchMenuLoggedIn = function (req, res) {
+    let files = fs.readdirSync(imageDirPath);
     db.db.find({'menu':'Lunch'}, function(err,dish) {
         const types = {
             starter: [],
@@ -226,7 +231,8 @@ exports.lunchMenuLoggedIn = function (req, res) {
             res.render('lunchMenu', {
                 title: "Restaurant - Lunch Menu",
                 types: types,
-                staff: "staff"
+                staff: "staff",
+                images: files
             });
         }
     });
@@ -347,8 +353,18 @@ exports.post_edit_dish = function (req, res) {
         featuredDish = false;
     }
 
+    console.log("Name: ", req.body.name)
+    console.log("Ingredients: ", req.body.ingredients)
+    console.log("Allergy: ", req.body.allergyInfo)
+    console.log("Type: ", req.body.dishType)
+    console.log("Image: ", req.file)
+    console.log("Menu: ", req.body.menu)
+    console.log("Price: ", req.body.price)
+    console.log("Description: ", req.body.description)
+    console.log("Featured Dish?: ", featuredDish)
+
     if (!req.body.name || !req.body.ingredients || !req.body.allergyInfo || !req.body.dishType ||
-        !req.body.image || !req.body.menu || !req.body.price || !req.body.description) {
+        !req.file || !req.body.menu || !req.body.price || !req.body.description) {
             res.status(400).render("errors/400", {
                 title: "Error: 400",
                 content: "All fields are Required!"
@@ -356,8 +372,9 @@ exports.post_edit_dish = function (req, res) {
         return;
     }
     
-    db.editDish(id, req.body.name, req.body.ingredients, req.body.allergyInfo, req.body.dishType, req.body.image,
+    db.editDish(id, req.body.name, req.body.ingredients, req.body.allergyInfo, req.body.dishType, req.file.originalname,
         req.body.menu, req.body.price, req.body.description, featuredDish);
+
     res.redirect("/home");
 }
 
