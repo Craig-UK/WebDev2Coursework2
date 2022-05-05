@@ -74,6 +74,7 @@ exports.dinnerMenu = function (req, res) {
 };
 
 exports.getSingleDish = function (req, res) {
+    let files = fs.readdirSync(imageDirPath);
     let dish = req.params._id;
     db.getSingleDish(dish)
         .then((dishes) => {
@@ -82,6 +83,7 @@ exports.getSingleDish = function (req, res) {
                 title: "Restaurant - Dish Details",
                 dish: "dish",
                 dishes: dishes,
+                images: files
             });
         })
         .catch((err) => {
@@ -154,6 +156,26 @@ exports.aboutPageLoggedIn = function (req, res) {
         title: "Restaurant - About",
         staff: "staff"
     });
+};
+
+exports.getSingleDishLoggedIn = function (req, res) {
+    let files = fs.readdirSync(imageDirPath);
+    let dish = req.params._id;
+    db.getSingleDish(dish)
+        .then((dishes) => {
+            console.log("Processing", dish);
+            res.render("singleDish", {
+                title: "Restaurant - Dish Details",
+                dish: "dish",
+                dishes: dishes,
+                staff: "staff",
+                images: files
+            });
+        })
+        .catch((err) => {
+            console.log("Error: ");
+            console.log(JSON.stringify(err));
+        });
 };
 
 exports.dinnerMenuLoggedIn = function (req, res) {
