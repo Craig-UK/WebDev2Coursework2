@@ -89,13 +89,13 @@
                     </div>
                     <div class="mb-3">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="featured" id="flexCheckDefault">
+                            <input class="form-check-input" type="checkbox" name="featured" id="featured" value="{{featured}}">
                             <label class="form-check-label" for="flexCheckDefault">
                                 Featured Dish?
                             </label>
+                            <p id="test"></p>
                         </div>
                     </div>
-
                     <div class="mb-3 d-flex justify-content-center">
                         <input type="submit" class="btn btn-primary" value="Submit">
                     </div>
@@ -123,6 +123,17 @@
         extension.value = ext;
         
         }
+
+        function changeCheckBox() {
+            var checkBox = document.getElementById("featured");
+            if(checkBox.value == "true") {
+                checkBox.checked = true;
+            } else {
+                checkBox.checked = false;
+            }
+        }
+
+        window.onload = changeCheckBox();
 
     </script>
 </body>
