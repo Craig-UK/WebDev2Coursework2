@@ -55,8 +55,9 @@
                         <label for="image" class="formlabel">
                             Image of Menu Item
                         </label>
-                        <input type="file" class="form-control" formenctype="multipart/form-data" id="formFileSm"
-                            name="image">
+                        <input type="file" accept="image/jpeg" class="form-control" formenctype="multipart/form-data" id="formFileSm"
+                            name="image" onchange="getFileNameWithExt(event)">
+                        <input type="text" class="form-control" name="output" id="output" value="{{image}}" disabled>
                     </div>
                     <div class="col-md-10 mb-3">
                         <label for="menu" class="formlabel">
@@ -104,6 +105,26 @@
     </div>
     {{/dishes}}
     {{>validation}}
+
+    <script>
+        console.log("Getting file name and extension.")
+        function getFileNameWithExt(event) {
+        if (!event || !event.target || !event.target.files || event.target.files.length === 0) {
+            return;
+        }
+
+        const name = event.target.files[0].name;
+        const lastDot = name.lastIndexOf('.');
+
+        const fileName = name.substring(0, lastDot);
+        const ext = name.substring(lastDot + 1);
+
+        output.value = fileName + "." + ext;
+        extension.value = ext;
+        
+        }
+
+    </script>
 </body>
 
 </html>
