@@ -49,6 +49,8 @@ A "Go Home" button was implemented on the "staff login" page. This button was ad
 This feature was not implemented because when the icon was clicked it would show the "logout" button, but
 implementing this meant that the navbar went further along the page and made the UI look unappealing. Also
 when hovered over the "logout" button, it would show a different colour than that of the navbar and again, made the UI look unappealing.
+###### "Unassigned Menu"
+
 ## Images
 ###### Restaurant
 The restaurant image was downloaded from pexels.com. 
@@ -74,5 +76,6 @@ https://webdev2coursework2.herokuapp.com/
 - [x] Allow staff to update the image of a dish when editing a dish (Current image should appear)
 - [x] Images of the dish should appear on the menus page(dinner or lunch)
 - [x] Images of the dish should appear on the dish details page
+- [ ] Make an 'unassigned menu' where the dishes that were 'removed' from any of the menus go, but are able to be re-added to the menus.
 - [ ] Improve the UI of all pages
 - [x] Deploy Web Application
