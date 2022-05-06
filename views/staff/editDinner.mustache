@@ -8,13 +8,13 @@
     {{>nav}}
     <h1 class="text-center">Edit Dinner Menu</h1>
     <div class="table-responsive">
-        <table class="table">
+        <table class="table" id="dishTable">
             <thead>
                 <tr>
                     <th scope="col">Dish Name</th>
                     <th scope="col">Edit Dish</th>
                     <th scope="col">Delete Dish</th>
-                    <th scope="col">Featured Dish?</th>
+                    <th scope="col">Chef Special?</th>
                 </tr>
             </thead>
             {{#dishes}}
@@ -23,12 +23,34 @@
                     <th scope="row">{{name}}</th>
                     <td><a href="/dish/edit/{{_id}}">Edit</a></td>
                     <td><a href="/dish/delete/{{_id}}">Delete</a></td>
-                    <td>{{featured}}</td>
+                    <td>{{chefSpecial}}</td>
                 </tr>
             </tbody>
             {{/dishes}}
         </table>
     </div>
+
+    <script>
+        function chefSpecial() {
+            var dishTable = document.getElementById("dishTable");
+            for (var rowCount = 0, row; row = dishTable.rows[rowCount]; rowCount++) {
+                for (var colCount = 0, col; col = row.cells[colCount]; colCount++) {
+                    if (col.innerText == "true") {
+                        col.innerHTML = "Currently a Chef Special";
+                    } else {
+                        if (col.innerText == "false") {
+                            col.innerHTML = "Not currently a Chef Special";
+                        }
+                    }
+                }  
+            }
+        }
+
+        // This function was coded with the help from this link: https://stackoverflow.com/questions/3065342/how-do-i-iterate-through-table-rows-and-cells-in-javascript
+
+        window.onload = chefSpecial();
+    </script>
+
 </body>
 
 </html>

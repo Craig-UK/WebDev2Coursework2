@@ -89,11 +89,10 @@
                     </div>
                     <div class="mb-3">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="featured" id="featured" value="{{featured}}">
+                            <input class="form-check-input" type="checkbox" name="chefSpecial" id="chefSpecial" value="{{chefSpecial}}">
                             <label class="form-check-label" for="flexCheckDefault">
-                                Featured Dish?
+                                Chef Special?
                             </label>
-                            <p id="test"></p>
                         </div>
                     </div>
                     <div class="mb-3 d-flex justify-content-center">
@@ -107,7 +106,6 @@
     {{>validation}}
 
     <script>
-        console.log("Getting file name and extension.")
         function getFileNameWithExt(event) {
         if (!event || !event.target || !event.target.files || event.target.files.length === 0) {
             return;
@@ -125,7 +123,7 @@
         }
 
         function changeCheckBox() {
-            var checkBox = document.getElementById("featured");
+            var checkBox = document.getElementById("chefSpecial");
             if(checkBox.value == "true") {
                 checkBox.checked = true;
             } else {

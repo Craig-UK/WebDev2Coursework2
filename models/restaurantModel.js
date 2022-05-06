@@ -31,7 +31,7 @@ class Restaurant {
             menu: "Lunch",
             price: "3.50",
             description: "Delicious French Toast served with Maple Syrup",
-            featured: true
+            chefSpecial: true
         });
         this.db.insert({
             name: "Lasagna",
@@ -49,7 +49,7 @@ class Restaurant {
             menu: "Dinner",
             price: "3.50",
             description: "Delicious French Toast served with Maple Syrup",
-            featured: false
+            chefSpecial: false
         });
         this.db.insert({
             name: "Test",
@@ -67,7 +67,7 @@ class Restaurant {
             menu: "Dinner",
             price: "3.50",
             description: "Delicious French Toast served with Maple Syrup",
-            featured: false
+            chefSpecial: false
         });
         return this;
     }
@@ -102,10 +102,10 @@ class Restaurant {
         });
     }
 
-    getFeaturedDish() {
+    getChefSpecials() {
         return new Promise((resolve, reject) => {
-            this.db.findOne({
-                featured: true
+            this.db.find({
+                chefSpecial: true
             }, function (err, dishes) {
                 if (err) {
                     reject(err);
@@ -117,7 +117,7 @@ class Restaurant {
         });
     }
 
-    addNewDish(name, ingredients, allergyInfo, dishType, image, menu, price, description, featured) {
+    addNewDish(name, ingredients, allergyInfo, dishType, image, menu, price, description, chefSpecial) {
         var entry = {
             name: name,
             ingredients: ingredients,
@@ -127,7 +127,7 @@ class Restaurant {
             menu: menu,
             price: price,
             description: description,
-            featured: featured
+            chefSpecial: chefSpecial
         }
         console.log("Entry created successfully.");
         this.db.insert(entry, function (err, doc) {
@@ -139,7 +139,7 @@ class Restaurant {
         });
     }
 
-    editDish(id, name, ingredients, allergyInfo, dishType, image, menu, price, description, featured) {
+    editDish(id, name, ingredients, allergyInfo, dishType, image, menu, price, description, chefSpecial) {
         console.log("Started updating dish.", name);
         this.db.update({
             '_id': id
@@ -154,7 +154,7 @@ class Restaurant {
                 'menu': menu,
                 'price': price,
                 'description': description,
-                'featured': featured
+                'chefSpecial': chefSpecial
             }
         }, {
             multi: false

@@ -13,12 +13,12 @@ const imageDirPath = path.join(__dirname, "../public/images");
 NOT LOGGED IN STAFF
 */
 exports.homePage = function (req, res) {
-    db.getFeaturedDish()
-      .then((featured) => {
-        console.log("Featured dish: ", featured);
+    db.getChefSpecials()
+      .then((chefSpecial) => {
+        console.log("Featured dish: ", chefSpecial);
         res.render("home", {
             title: "Restaurant - Home",
-            featured: featured
+            chefSpecial: chefSpecial
         });
       })
       .catch((err) => {
@@ -136,12 +136,12 @@ exports.lunchMenu = function (req, res) {
 LOGGED IN STAFF
 */
 exports.homePageLoggedIn = function (req, res) {
-    db.getFeaturedDish()
-      .then((featured) => {
-        console.log("Featured dish: ", featured);
+    db.getChefSpecials()
+      .then((chefSpecial) => {
+        console.log("Featured dish: ", chefSpecial);
         res.render("home", {
             title: "Restaurant - Home",
-            featured: featured,
+            chefSpecial: chefSpecial,
             staff: "staff"
         });
       })
@@ -279,7 +279,7 @@ exports.editDinner = function (req, res) {
 exports.editLunch = function (req, res) {
     db.getAllLunchDishes()
         .then((dishes) => {
-            res.render("staff/editDinner", {
+            res.render("staff/editLunch", {
                 title: "Restaurant - Lunch Menu",
                 dishes: dishes,
                 staff: "staff"
@@ -331,11 +331,11 @@ const upload = multer({
 exports.post_new_dish = function (req, res) {
     console.log("Processing new dish.");
 
-    let featuredDish = req.body['featured'];
-    if(featuredDish) {
-        featuredDish = true;
+    let chefSpecial = req.body['chefSpecial'];
+    if(chefSpecial) {
+        chefSpecial = true;
     } else {
-        featuredDish = false;
+        chefSpecial = false;
     }
 
     console.log("Name: ", req.body.name)
@@ -346,7 +346,7 @@ exports.post_new_dish = function (req, res) {
     console.log("Menu: ", req.body.menu)
     console.log("Price: ", req.body.price)
     console.log("Description: ", req.body.description)
-    console.log("Featured Dish?: ", featuredDish)
+    console.log("Chef Special?: ", chefSpecial)
 
     if (!req.body.name || !req.body.ingredients || !req.body.allergyInfo || !req.body.dishType ||
         !req.file || !req.body.menu || !req.body.price || !req.body.description) {
@@ -358,7 +358,7 @@ exports.post_new_dish = function (req, res) {
     }
 
     db.addNewDish(req.body.name, req.body.ingredients, req.body.allergyInfo, req.body.dishType, req.file.originalname,
-                            req.body.menu, req.body.price, req.body.description, featuredDish);
+                            req.body.menu, req.body.price, req.body.description, chefSpecial);
 
     res.redirect("/home");
 }
@@ -368,11 +368,11 @@ exports.post_edit_dish = function (req, res) {
     
     let id = req.params._id;
 
-    let featuredDish = req.body['featured'];
-    if(featuredDish) {
-        featuredDish = true;
+    let chefSpecial = req.body['chefSpecial'];
+    if(chefSpecial) {
+        chefSpecial = true;
     } else {
-        featuredDish = false;
+        chefSpecial = false;
     }
 
     console.log("Name: ", req.body.name)
@@ -383,7 +383,7 @@ exports.post_edit_dish = function (req, res) {
     console.log("Menu: ", req.body.menu)
     console.log("Price: ", req.body.price)
     console.log("Description: ", req.body.description)
-    console.log("Featured Dish?: ", featuredDish)
+    console.log("Chef Special?: ", chefSpecial)
     
     if (!req.body.name || !req.body.ingredients || !req.body.allergyInfo || !req.body.dishType ||
         !req.body.output || !req.body.menu || !req.body.price || !req.body.description) {
@@ -397,11 +397,11 @@ exports.post_edit_dish = function (req, res) {
     if (req.file) {
         console.log("Image Detected! Uploading: ", req.file);
         db.editDish(id, req.body.name, req.body.ingredients, req.body.allergyInfo, req.body.dishType, req.file.originalname,
-            req.body.menu, req.body.price, req.body.description, featuredDish);
+            req.body.menu, req.body.price, req.body.description, chefSpecial);
     } else {
         console.log("No Image Detected! Updating dish: ", req.body.name);
         db.editDish(id, req.body.name, req.body.ingredients, req.body.allergyInfo, req.body.dishType, req.body.output,
-            req.body.menu, req.body.price, req.body.description, featuredDish);
+            req.body.menu, req.body.price, req.body.description, chefSpecial);
     }
 
     res.redirect("/home");

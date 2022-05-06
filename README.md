@@ -41,8 +41,8 @@ pages. I then realised, after feedback, that these pages were unnecessary, so th
 This change was recommended to help organise the dishes by the dish type (Starter, etc.) on each of the menu pages (Dinner or Lunch). This was a good change because this is the way that dishes are organised on most online restaurant websites. 
 ###### Error Pages
 Custom error pages for each of the errors (400, 401, 403, 404 and 500) were implemented to ensure a better experience for the user when and if these errors occur on the web application. 
-###### Featured Dish in the Data Structure
-A new field within the data structure for the dishes was added called "featured". This field is a boolean value. This was implemented to make showing a featured dish on the home page of the web application easier and more user friendly. Only 1 dish will have the "featured" field set to true and this dish will show up on the homepage of the web application under the heading "Featured Dish". 
+###### Chef Specials in the Data Structure
+A new field within the data structure for the dishes was added called "chefSpecials". This field is a boolean value. This was implemented to make showing Chef Specials on the home page of the web application easier and more user friendly. All dishes with the "chefSpecials" field set to true  will show up on the homepage of the web application under the heading "Chef Specials". Chef Specials replace the "featured dish" feature because Chef Specials is more relevant to a real life implementation of a restaurant website.
 ###### "Go Home" button on the login page
 A "Go Home" button was implemented on the "staff login" page. This button was added incase the user accidently went to the "staff login" page and this will further improve the User Experience of the web application. This button will, as it says, take the user back to the home page of the web application. 
 ###### No "user icon" on the navbar when user is logged in
@@ -67,12 +67,12 @@ https://webdev2coursework2.herokuapp.com/
 - [x] Create the edit dinner function
 - [x] Add delete dish function
 - [x] Add error pages
-- [x] Add featured dish function
-- [x] Allow staff to make a dish a "featured dish" when creating a dish or editing a dish
-- [x] Display featured dish on the home page
+- [x] Add Chef Specials function
+- [x] Allow staff to make a dish a "Chef Specials" when creating a dish or editing a dish
+- [x] Display Chef Specials on the home page
 - [x] Allow staff to upload images when creating a dish
-- [ ] Allow staff to update the image of a dish when editing a dish (Current image should appear)
+- [x] Allow staff to update the image of a dish when editing a dish (Current image should appear)
 - [x] Images of the dish should appear on the menus page(dinner or lunch)
-- [ ] Images of the dish should appear on the dish details page
+- [x] Images of the dish should appear on the dish details page
 - [ ] Improve the UI of all pages
 - [x] Deploy Web Application
