@@ -21,7 +21,7 @@ exports.login = function (req, res, next) {
         bcrypt.compare(password, email.password, function(err, result) {
             if(result) {
                 let payload = { email: email };
-                let accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET,{expiresIn: 300});
+                let accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET,{expiresIn: "2d"});
                 res.cookie("jwt", accessToken);
                 next();
             } else {

@@ -7,31 +7,33 @@
 <body>
     {{>nav}}
     <h1 class="text-center">Unassigned Dishes</h1>
-    <div class="table-responsive">
-        <table class="table" id="dishTable">
-            <thead>
-                <tr>
-                    <th scope="col">Dish Name</th>
-                    <th scope="col">Edit Dish</th>
-                    <th scope="col">Delete Dish</th>
-                    <th scope="col">Move to Lunch Menu</th>
-                    <th scope="col">Move to Dinner Menu</th>
-                    <th scope="col">Chef Special?</th>
-                </tr>
-            </thead>
-            {{#dishes}}
-            <tbody>
-                <tr>
-                    <th scope="row">{{name}}</th>
-                    <td><a class="btn btn-success" href="/dish/edit/{{_id}}">Edit</a></td>
-                    <td><a class="btn btn-success" href="/dish/delete/{{_id}}">Delete</a></td>
-                    <td><a class="btn btn-success" href="/dish/lunch/{{_id}}">Move Dish to Lunch</a></td>
-                    <td><a class="btn btn-success" href="/dish/dinner/{{_id}}">Move Dish to Dinner</a></td>
-                    <td id="chefSpecial">{{chefSpecial}}</td>
-                </tr>
-            </tbody>
-            {{/dishes}}
-        </table>
+    <div class="container">
+        <div class="table-responsive">
+            <table class="table" id="dishTable">
+                <thead>
+                    <tr>
+                        <th scope="col">Dish Name</th>
+                        <th scope="col">Edit Dish</th>
+                        <th scope="col">Delete Dish</th>
+                        <th scope="col">Move to Lunch Menu</th>
+                        <th scope="col">Move to Dinner Menu</th>
+                        <th scope="col">Chef Special?</th>
+                    </tr>
+                </thead>
+                {{#dishes}}
+                <tbody>
+                    <tr>
+                        <th scope="row">{{name}}</th>
+                        <td><a class="btn btn-success" href="/dish/edit/{{_id}}">Edit</a></td>
+                        <td><a class="btn btn-success" href="/dish/delete/{{_id}}">Delete</a></td>
+                        <td><a class="btn btn-success" href="/dish/lunch/{{_id}}">Move Dish to Lunch</a></td>
+                        <td><a class="btn btn-success" href="/dish/dinner/{{_id}}">Move Dish to Dinner</a></td>
+                        <td id="chefSpecial">{{chefSpecial}}</td>
+                    </tr>
+                </tbody>
+                {{/dishes}}
+            </table>
+        </div>
     </div>
 
     <script>
@@ -46,7 +48,7 @@
                             col.innerHTML = "Not currently a Chef Special";
                         }
                     }
-                }  
+                }
             }
         }
 

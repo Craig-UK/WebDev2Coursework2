@@ -264,7 +264,7 @@ exports.editDinner = function (req, res) {
     db.getAllDinnerDishes()
         .then((dishes) => {
             res.render("staff/editDinner", {
-                title: "Restaurant - Lunch Menu",
+                title: "Restaurant - Edit Dinner Menu",
                 dishes: dishes,
                 staff: "staff"
             });
@@ -280,7 +280,7 @@ exports.editLunch = function (req, res) {
     db.getAllLunchDishes()
         .then((dishes) => {
             res.render("staff/editLunch", {
-                title: "Restaurant - Lunch Menu",
+                title: "Restaurant - Edit Lunch Menu",
                 dishes: dishes,
                 staff: "staff"
             });
