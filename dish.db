@@ -1,3 +1,4 @@
 {"name":"Berry Cake","ingredients":["Egg","Milk","Whole Wheat Bread"],"allergyInfo":["Milk","Egg"],"dishType":"Dessert","image":"berrycake.jpg","menu":"Dinner","price":"3.50","description":"Delicious French Toast served with Maple Syrup","chefSpecial":false,"_id":"FrThcSYDxxdv6I4c"}
 {"name":"Lasagne","ingredients":"Egg,Milk,Whole Wheat Bread","allergyInfo":"Cheese","dishType":"Starter","image":"lasagne.jpg","menu":"Dinner","price":"3.50","description":"Delicious Lasagna served with Garlic Bread","chefSpecial":false,"_id":"RZ2bziVIPr7pWO9t"}
 {"name":"French Toast","ingredients":["Egg","Milk","Whole Wheat Bread"],"allergyInfo":["Milk","Egg"],"dishType":"Starter","image":"frenchtoast.jpg","menu":"Lunch","price":"3.50","description":"Delicious French Toast served with Maple Syrup","chefSpecial":true,"_id":"X2W2erRDRgLSgNXS"}
+
