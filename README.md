@@ -55,12 +55,12 @@ when hovered over the "logout" button, it would show a different colour than tha
 ###### Restaurant
 The restaurant image was downloaded from pexels.com. 
 Here is the link to the image: https://www.pexels.com/photo/alcohol-architecture-bar-beer-260922/
-###### Useful Links
+## Useful Links
 
 ## Deployment
 ###### This Web Application has been deployed using Heroku. You can check it out here:
 https://webdev2coursework2.herokuapp.com/
-## Todo
+## Todo (Features implemented)
 - [x] Staff Login function
 - [x] Staff can access all pages and instead of login, the navbar shows "logout" when staff are logged in
 - [x] Add the add new dish functionality
@@ -78,6 +78,6 @@ https://webdev2coursework2.herokuapp.com/
 - [x] Allow staff to update the image of a dish when editing a dish (Current image should appear)
 - [x] Images of the dish should appear on the menus page(dinner or lunch)
 - [x] Images of the dish should appear on the dish details page
-- [ ] Make an 'unassigned menu' where the dishes that were 'removed' from any of the menus go, but are able to be re-added to the menus.
-- [ ] Improve the UI of all pages
+- [x] Make an 'unassigned menu' where the dishes that were 'removed' from any of the menus go, but are able to be re-added to the menus.
+- [x] Improve the UI of all pages
 - [x] Deploy Web Application

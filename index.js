@@ -26,7 +26,7 @@ app.engine('mustache', mustache(views_path + '/partials', '.mustache'));
 app.set('view engine', 'mustache');
 app.set('views', views_path); // Initialise views path
 
-const router = require('./routes/restaurantRoutes');
+const router = require('./routes/pageRoutes');
 app.use('/', router);
 
 const PORT = process.env.PORT || 3000;
