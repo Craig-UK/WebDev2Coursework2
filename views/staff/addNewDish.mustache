@@ -51,7 +51,6 @@
                             Dish Type
                         </label>
                         <select class="form-select" id="dishType" name="dishType">
-                            <option selected>Dish Type</option>
                             <option>Starter</option>
                             <option>Main Course</option>
                             <option>Dessert</option>
@@ -74,7 +73,6 @@
                             Dinner or Lunch Menu?
                         </label>
                         <select class="form-select" id="menu" name="menu">
-                            <option selected>Dinner or Lunch Menu?</option>
                             <option>Dinner</option>
                             <option>Lunch</option>
                             <option>Unassigned</option>
@@ -86,7 +84,10 @@
                         </label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="allergyInfo" name="allergyInfo"
-                                placeholder="Menu Item Allergy Information">
+                                placeholder="Menu Item Allergy Information" required>
+                            <div class="invalid-feedback">
+                                Allergy Information is required. If there is no Allergy Information, please enter "none".
+                            </div>
                         </div>
                     </div>
                     <div class="mb-3">
@@ -94,7 +95,7 @@
                             Menu Item Price
                         </label>
                         <div class="col-sm-3">
-                            <input type="text" class="form-control" id="price" name="price"
+                            <input type="number" class="form-control" id="price" name="price"
                                 placeholder="Menu Item Price" required>
                             <div class="invalid-feedback">
                                 Price is required.

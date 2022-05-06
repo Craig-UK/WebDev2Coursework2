@@ -11,13 +11,15 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <form method="POST" action="/dish/edit/{{_id}}" enctype="multipart/form-data" class="needs-validation" novalidate>
+                <form method="POST" action="/dish/edit/{{_id}}" enctype="multipart/form-data" class="needs-validation"
+                    novalidate>
                     <div class="mb-3">
                         <label for="name" class="formlabel">
                             Menu Item Name
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="name" name="name" placeholder="{{name}}" value="{{name}}" required>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="{{name}}"
+                                value="{{name}}" required>
                             <div class="invalid-feedback">
                                 Name is required.
                             </div>
@@ -64,9 +66,10 @@
                         <label for="image" class="formlabel">
                             Image of Menu Item
                         </label>
-                        <input type="file" accept="image/jpeg" class="form-control" formenctype="multipart/form-data" id="formFileSm"
-                            name="image" onchange="getFileNameWithExt(event)">
-                        <input readonly type="text" class="form-control" name="output" id="output" value="{{image}}" required>
+                        <input type="file" accept="image/jpeg" class="form-control" formenctype="multipart/form-data"
+                            id="formFileSm" name="image" onchange="getFileNameWithExt(event)">
+                        <input readonly type="text" class="form-control" name="output" id="output" value="{{image}}"
+                            required>
                         <div class="invalid-feedback">
                             Image is required.
                         </div>
@@ -88,35 +91,41 @@
                         </label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="allergyInfo" name="allergyInfo"
-                                placeholder="{{allergyInfo}}" value="{{allergyInfo}}">
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="price" class="formlabel">
-                            Menu Item Price
-                        </label>
-                        <div class="col-sm-3">
-                            <input type="text" class="form-control" id="price" name="price"
-                                placeholder="{{price}}" value="{{price}}" required>
+                                placeholder="{{allergyInfo}}" value="{{allergyInfo}}" required>
                             <div class="invalid-feedback">
-                                Price is required.
+                                Allergy Information is required. If there is no Allergy Information, please enter
+                                "none".
                             </div>
                         </div>
                     </div>
-                    <div class="mb-3">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="chefSpecial" id="chefSpecial" value="{{chefSpecial}}">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Chef Special?
-                            </label>
-                        </div>
-                    </div>
-                    <div class="mb-3 d-flex justify-content-center">
-                        <input type="submit" class="btn btn-primary" value="Submit">
-                    </div>
-                </form>
             </div>
+            <div class="mb-3">
+                <label for="price" class="formlabel">
+                    Menu Item Price
+                </label>
+                <div class="col-sm-3">
+                    <input type="number" class="form-control" id="price" name="price" placeholder="{{price}}"
+                        value="{{price}}" required>
+                    <div class="invalid-feedback">
+                        Price is required and can only be a number.
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="chefSpecial" id="chefSpecial"
+                        value="{{chefSpecial}}">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Chef Special?
+                    </label>
+                </div>
+            </div>
+            <div class="mb-3 d-flex justify-content-center">
+                <input type="submit" class="btn btn-primary" value="Submit">
+            </div>
+            </form>
         </div>
+    </div>
     </div>
     {{/dishes}}
     {{>validation}}
@@ -139,7 +148,7 @@
 
         function changeCheckBox() {
             var checkBox = document.getElementById("chefSpecial");
-            if(checkBox.value == "true") {
+            if (checkBox.value == "true") {
                 checkBox.checked = true;
             } else {
                 checkBox.checked = false;
@@ -147,7 +156,6 @@
         }
 
         window.onload = changeCheckBox();
-
     </script>
 </body>
 
