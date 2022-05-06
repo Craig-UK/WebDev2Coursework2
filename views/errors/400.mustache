@@ -6,21 +6,28 @@
 
 <body>
     {{>nav}}
-    <h1 class="text-center">Error: 400.</h1>
+    <h1 class="text-center">Error: 400 Bad Request.</h1>
     {{#content}}
         <p class="text-center">{{content}}</p>
     {{/content}}
     {{^staff}}
-    <div class="form-group d-flex justify-content-center">
-        <a href="/">Go to Home</a>
-    </div>
-    <div class="form-group d-flex justify-content-center">
-        <a href="/login">Go to Login</a>
+    <div class="d-flex justify-content-center">
+        <div class="col-md-1">
+            <a class="btn btn-success" href="/">Go to Home</a>
+        </div>
+        <div class="col-md-1">
+            <a class="btn btn-success" href="/login">Go to Login</a>
+        </div>
     </div>
     {{/staff}}
     {{#staff}}
-    <div class="form-group d-flex justify-content-center">
-        <a href="/home">Go to homepage</a>
+    <div class="d-flex justify-content-center">
+        <div class="col-md-1">
+            <a class="btn btn-success" href="/home">Go to Home</a>
+        </div>
+        <div class="col-md-1">
+            <a class="btn btn-success" href="/login">Go to Login</a>
+        </div>
     </div>
     {{/staff}}
 </body>

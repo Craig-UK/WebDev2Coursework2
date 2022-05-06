@@ -8,13 +8,17 @@
     {{>nav}}
     <h1 class="text-center">Error: 500 Internal Server Error.</h1>
     {{^staff}}
-    <div class="form-group d-flex justify-content-center">
-        <a href="/">Go to Home</a>
+    <div class="d-flex justify-content-center">
+        <div class="col-md-1">
+            <a class="btn btn-success" href="/">Go to Home</a>
+        </div>
     </div>
     {{/staff}}
     {{#staff}}
-    <div class="form-group d-flex justify-content-center">
-        <a href="/home">Go to homepage</a>
+    <div class="d-flex justify-content-center">
+        <div class="col-md-1">
+            <a class="btn btn-success" href="/home">Go to Home</a>
+        </div>
     </div>
     {{/staff}}
 </body>

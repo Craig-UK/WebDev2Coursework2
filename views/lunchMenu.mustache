@@ -8,9 +8,9 @@
     {{>nav}}
     <h1 class="text-center">Lunch Menu</h1>
     <h2 id="dishType" class="text-center">Starters</h2>
+    {{#types.starter}}
     <div class="d-flex justify-content-center">
-        {{#types.starter}}
-        <div class="card mb-3" style="max-width: 540px;">
+        <div class="card mb-3" style="width: 540px;">
             <div class="row g-0">
                 <div class="col-md-4">
                     <img src="images/{{image}}" class="img-fluid rounded-start" alt="...">
@@ -30,15 +30,15 @@
                 </div>
             </div>
         </div>
-        {{/types.starter}}
     </div>
+    {{/types.starter}}
     {{^types.starter}}
     <p class="text-center"> No dishes </p>
     {{/types.starter}}
     <h2 class="text-center">Main Courses</h2>
+    {{#types.main}}
     <div class="d-flex justify-content-center">
-        {{#types.main}}
-        <div class="card mb-3" style="max-width: 540px;">
+        <div class="card mb-3" style="width: 540px;">
             <div class="row g-0">
                 <div class="col-md-4">
                     <img src="images/{{image}}" class="img-fluid rounded-start" alt="...">
@@ -58,15 +58,15 @@
                 </div>
             </div>
         </div>
-        {{/types.main}}
     </div>
+    {{/types.main}}
     {{^types.main}}
     <p class="text-center"> No dishes </p>
     {{/types.main}}
     <h2 class="text-center">Desserts</h2>
+    {{#types.dessert}}
     <div class="d-flex justify-content-center">
-        {{#types.dessert}}
-        <div class="card mb-3" style="max-width: 540px;">
+        <div class="card mb-3" style="width: 540px;">
             <div class="row g-0">
                 <div class="col-md-4">
                     <img src="images/{{image}}" class="img-fluid rounded-start" alt="...">
@@ -86,15 +86,15 @@
                 </div>
             </div>
         </div>
-        {{/types.dessert}}
     </div>
+    {{/types.dessert}}
     {{^types.dessert}}
     <p class="text-center"> No dishes </p>
     {{/types.dessert}}
     <h2 class="text-center">Cold Drinks</h2>
+    {{#types.coldDrink}}
     <div class="d-flex justify-content-center">
-        {{#types.coldDrink}}
-        <div class="card mb-3" style="max-width: 540px;">
+        <div class="card mb-3" style="width: 540px;">
             <div class="row g-0">
                 <div class="col-md-4">
                     <img src="images/{{image}}" class="img-fluid rounded-start" alt="...">
@@ -114,15 +114,15 @@
                 </div>
             </div>
         </div>
-        {{/types.coldDrink}}
     </div>
+    {{/types.coldDrink}}
     {{^types.coldDrink}}
     <p class="text-center"> No dishes </p>
     {{/types.coldDrink}}
     <h2 class="text-center">Warm Drinks</h2>
+    {{#types.warmDrink}}
     <div class="d-flex justify-content-center">
-        {{#types.warmDrink}}
-        <div class="card mb-3" style="max-width: 540px;">
+        <div class="card mb-3" style="width: 540px;">
             <div class="row g-0">
                 <div class="col-md-4">
                     <img src="images/{{image}}" class="img-fluid rounded-start" alt="...">
@@ -142,8 +142,7 @@
                 </div>
             </div>
         </div>
-        {{/types.warmDrink}}
-    </div>
+    </div> {{/types.warmDrink}}
     {{^types.warmDrink}}
     <p class="text-center"> No dishes </p>
     {{/types.warmDrink}}

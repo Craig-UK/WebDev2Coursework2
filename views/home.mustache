@@ -14,10 +14,10 @@
     </div>
     <h1 class="text-center">About the Restaurant</h1>
     <h1 class="text-center">Chef Specials</h1>
+    {{#chefSpecial}}
     <div class="d-flex justify-content-center">
-        {{#chefSpecial}}
-        <div class="card mb-3" style="max-width: 540px;">
-            <div class="row">
+        <div class="card mb-3" style="width: 540px;">
+            <div class="row g-0">
                 <div class="col-md-4">
                     <img src="images/{{image}}" class="img-fluid rounded-start" alt="...">
                 </div>
@@ -39,8 +39,8 @@
                 </div>
             </div>
         </div>
-        {{/chefSpecial}}
     </div>
+    {{/chefSpecial}}
 </body>
 
 </html>
