@@ -27,14 +27,14 @@ class Restaurant {
                 "Egg"
             ],
             dishType: "Starter",
-            image: "{imageURL}",
+            image: "frenchtoast.jpg",
             menu: "Lunch",
             price: "3.50",
             description: "Delicious French Toast served with Maple Syrup",
             chefSpecial: true
         });
         this.db.insert({
-            name: "Lasagna",
+            name: "Lasagne",
             ingredients: [
                 "Egg",
                 "Milk",
@@ -45,14 +45,14 @@ class Restaurant {
                 "Egg"
             ],
             dishType: "Starter",
-            image: "{imageURL}",
+            image: "lasagne.jpg",
             menu: "Dinner",
             price: "3.50",
             description: "Delicious French Toast served with Maple Syrup",
             chefSpecial: false
         });
         this.db.insert({
-            name: "Test",
+            name: "Berry Cake",
             ingredients: [
                 "Egg",
                 "Milk",
@@ -62,8 +62,8 @@ class Restaurant {
                 "Milk",
                 "Egg"
             ],
-            dishType: "Main Course",
-            image: "{imageURL}",
+            dishType: "Dessert",
+            image: "berrycake.jpg",
             menu: "Dinner",
             price: "3.50",
             description: "Delicious French Toast served with Maple Syrup",

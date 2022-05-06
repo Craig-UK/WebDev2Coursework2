@@ -53,11 +53,17 @@ when hovered over the "logout" button, it would show a different colour than tha
 An "unassigned menu" option was added to the "menu" dropdown when editing a dish or creating a dish. Unassigned dishes can't be seen on either of the menu pages. These dishes are only available for staff members by visiting the "Unassigned Dishes" link on the navigation bar. On each of the edit menu pages "Edit Dinner Menu" or "Edit Lunch Menu", the staff member is able to move a dish by clicking the "Unassign Dish" button and this will move the dish to unassigned. This was implemented as it was required in the specification document and is a significant feature incase the restaurant want to add a dish back to one of the menus later instead of completely deleting the dish.
 ## Images
 ###### Restaurant
-The restaurant image was downloaded from pexels.com. 
+The restaurant image was downloaded from [pexels](pexels.com). 
 Here is the link to the image: https://www.pexels.com/photo/alcohol-architecture-bar-beer-260922/
+###### About Page
+The restaurant image on the about page was downloaded from [pexels](pexels.com).
+Here is the link to the image: https://www.pexels.com/photo/wine-glasses-on-table-tops-941861/
+##### French Toast
+The French Toast image was downloaded from [pexels](pexels.com).
+Here is the link to the image: https://www.pexels.com/photo/a-plate-of-french-toast-4623075/
 ## Useful Links
 ###### Validation
-The validation for each of the forms (add dish, edit dish and login) was acquired from bootstrap. This was used to provide a better User Experience with validation and required fields within each of the forms. [You can see the validation page from bootstrap here](https://getbootstrap.com/docs/5.0/forms/validation/)
+The validation for each of the forms (add dish, edit dish and login) was acquired from bootstrap. This was used to provide a better User Experience with validation and required fields within each of the forms. [The validation page from bootstrap can be viewed here](https://getbootstrap.com/docs/5.0/forms/validation/)
 ###### Iterate through table on edit menu pages
 A function for iterating through the table on each of the pages was used to replace the "true" or "false" value under the "Chef Special?" column on the tables with either "Currently a Chef Special" or "Not currently a Chef Special". [This function was provided by the solution - the answer with the green tick - on this stackoverflow question](https://stackoverflow.com/questions/3065342/how-do-i-iterate-through-table-rows-and-cells-in-javascript)
 ###### Displaying image filename and extension on the edit dish page
