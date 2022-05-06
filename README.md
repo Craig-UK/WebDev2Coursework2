@@ -20,11 +20,11 @@ ACCESS_TOKEN_SECRET=<secret_text>
 npm install
 ```
 ###### Add the necessary folders
-Add these sub-folders to the "public" folder within the directory:
-bootstrap
-css
-jquery
-popper
+Add these sub-folders to the "public" folder within the directory: 
+- bootstrap
+- css 
+- jquery
+- popper
 ###### After all required modules have been installed, run one of these commands to start the Web Application
 ```
 npm run start
