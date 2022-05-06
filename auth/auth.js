@@ -9,11 +9,14 @@ exports.login = function (req, res, next) {
     userModel.lookup(email, function(err, email) {
         if(err) {
             console.log("error finding user", err);
-            return res.status(401).send();
+            return res.status(401).redirect("/401");
         }
         if(!email) {
             console.log("user with email ", email, " could not be found.");
-            return res.render("home");
+            return res.status(400).render("errors/400", {
+                title: "Error: 400",
+                content: "User with the specified email does not exist."
+            });
         }
         bcrypt.compare(password, email.password, function(err, result) {
             if(result) {
