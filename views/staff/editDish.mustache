@@ -67,6 +67,7 @@
                             <option selected>{{menu}}</option>
                             <option>Dinner</option>
                             <option>Lunch</option>
+                            <option>Unassigned</option>
                         </select>
                     </div>
                     <div class="mb-3">
@@ -107,19 +108,18 @@
 
     <script>
         function getFileNameWithExt(event) {
-        if (!event || !event.target || !event.target.files || event.target.files.length === 0) {
-            return;
-        }
+            if (!event || !event.target || !event.target.files || event.target.files.length === 0) {
+                return;
+            }
 
-        const name = event.target.files[0].name;
-        const lastDot = name.lastIndexOf('.');
+            const name = event.target.files[0].name;
+            const lastDot = name.lastIndexOf('.');
 
-        const fileName = name.substring(0, lastDot);
-        const ext = name.substring(lastDot + 1);
+            const fileName = name.substring(0, lastDot);
+            const ext = name.substring(lastDot + 1);
 
-        output.value = fileName + "." + ext;
-        extension.value = ext;
-        
+            output.value = fileName + "." + ext;
+            extension.value = ext;
         }
 
         function changeCheckBox() {

@@ -37,6 +37,10 @@ router.get("/lunchmenu", verify, pages.lunchMenuLoggedIn);
 router.get("/dishdetails/:_id", verify, pages.getSingleDishLoggedIn);
 router.get("/editdinner", verify, pages.editDinner);
 router.get("/editlunch", verify, pages.editLunch);
+router.get("/unassigned", verify, pages.editUnassigned);
+router.get("/dish/unassign/:_id", verify, pages.moveToUnassigned);
+router.get("/dish/lunch/:_id", verify, pages.moveToLunch);
+router.get("/dish/dinner/:_id", verify, pages.moveToDinner);
 router.get("/dish/edit/:_id", verify, pages.editDish);
 router.post("/dish/edit/:_id", upload.single("image"),
     (req, res) => {

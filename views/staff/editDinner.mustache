@@ -7,27 +7,31 @@
 <body>
     {{>nav}}
     <h1 class="text-center">Edit Dinner Menu</h1>
-    <div class="table-responsive">
-        <table class="table" id="dishTable">
-            <thead>
-                <tr>
-                    <th scope="col">Dish Name</th>
-                    <th scope="col">Edit Dish</th>
-                    <th scope="col">Delete Dish</th>
-                    <th scope="col">Chef Special?</th>
-                </tr>
-            </thead>
-            {{#dishes}}
-            <tbody>
-                <tr>
-                    <th scope="row">{{name}}</th>
-                    <td><a href="/dish/edit/{{_id}}">Edit</a></td>
-                    <td><a href="/dish/delete/{{_id}}">Delete</a></td>
-                    <td>{{chefSpecial}}</td>
-                </tr>
-            </tbody>
-            {{/dishes}}
-        </table>
+    <div class="container">
+        <div class="table-responsive">
+            <table class="table" id="dishTable">
+                <thead>
+                    <tr>
+                        <th scope="col">Dish Name</th>
+                        <th scope="col">Edit Dish</th>
+                        <th scope="col">Delete Dish</th>
+                        <th scope="col">Unassign Dish</th>
+                        <th scope="col">Chef Special?</th>
+                    </tr>
+                </thead>
+                {{#dishes}}
+                <tbody>
+                    <tr>
+                        <th scope="row">{{name}}</th>
+                        <td><a class="btn btn-success" href="/dish/edit/{{_id}}">Edit</a></td>
+                        <td><a class="btn btn-success" href="/dish/delete/{{_id}}">Delete</a></td>
+                        <td><a class="btn btn-success" href="/dish/unassign/{{_id}}">Unassign Dish</a></td>
+                        <td>{{chefSpecial}}</td>
+                    </tr>
+                </tbody>
+                {{/dishes}}
+            </table>
+        </div>
     </div>
 
     <script>

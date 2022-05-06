@@ -55,6 +55,8 @@ when hovered over the "logout" button, it would show a different colour than tha
 ###### Restaurant
 The restaurant image was downloaded from pexels.com. 
 Here is the link to the image: https://www.pexels.com/photo/alcohol-architecture-bar-beer-260922/
+###### Useful Links
+
 ## Deployment
 ###### This Web Application has been deployed using Heroku. You can check it out here:
 https://webdev2coursework2.herokuapp.com/

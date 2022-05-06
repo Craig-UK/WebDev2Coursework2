@@ -292,6 +292,46 @@ exports.editLunch = function (req, res) {
         });
 }
 
+exports.moveToUnassigned = function (req, res) {
+    let id = req.params._id;
+
+    db.unassignDish(id, "Unassigned");
+
+    res.redirect("/unassigned");
+}
+
+exports.moveToLunch = function (req, res) {
+    let id = req.params._id;
+
+    db.lunchDish(id, "Lunch");
+
+    res.redirect("/editlunch");
+}
+
+exports.moveToDinner = function (req, res) {
+    let id = req.params._id;
+
+    db.lunchDish(id, "Dinner");
+
+    res.redirect("/editdinner");
+}
+
+exports.editUnassigned = function (req, res) {
+    db.getAllUnassignedDishes()
+        .then((dishes) => {
+            res.render("staff/editUnassigned", {
+                title: "Restaurant - Unassigned ",
+                dishes: dishes,
+                staff: "staff"
+            });
+            console.log("Returned in editUnassigned ", dishes)
+        })
+        .catch((err) => {
+            console.log("An Error Occurred: ");
+            console.log(JSON.stringify(err));
+        });
+}
+
 exports.editDish = function (req, res) {
     let dish = req.params._id;
     db.editDishPage(dish)

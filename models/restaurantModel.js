@@ -102,6 +102,21 @@ class Restaurant {
         });
     }
 
+    getAllUnassignedDishes() {
+        return new Promise((resolve, reject) => {
+            this.db.find({
+                menu: "Unassigned"
+            }, function (err, dishes) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(dishes);
+                    console.log('getAllUnassignedDishes returns: ', dishes);
+                }
+            });
+        });
+    }
+
     getChefSpecials() {
         return new Promise((resolve, reject) => {
             this.db.find({
@@ -135,6 +150,63 @@ class Restaurant {
                 console.log("Error inserting dish into the database.", name);
             } else {
                 console.log("Dish successfully inserted into the database.", doc);
+            }
+        });
+    }
+
+    unassignDish(id, menu) {
+        console.log("Unassigning dish.", id);
+        this.db.update({
+            '_id': id
+        }, {
+            $set: {
+                'menu': menu,
+            }
+        }, {
+            multi: false
+        }, function (err, doc) {
+            if (err) {
+                console.log("Error unassigning dish.", id)
+            } else {
+                console.log("Dish successfully unassigned.", doc);
+            }
+        });
+    }
+
+    lunchDish(id, menu) {
+        console.log("Moving dish to Lunch Menu.", id);
+        this.db.update({
+            '_id': id
+        }, {
+            $set: {
+                'menu': menu,
+            }
+        }, {
+            multi: false
+        }, function (err, doc) {
+            if (err) {
+                console.log("Error moving dish to lunch.", id)
+            } else {
+                console.log("Dish successfully moved to lunch.", doc);
+            }
+        });
+    }
+
+    dinnerDish(id, menu) {
+        console.log("Moving dish to Dinner Menu.", id);
+        this.db.update({
+            '_id': id
+        }, {
+            $set: {
+                'menu': menu,
+            }
+        }, {
+            multi: false
+        }, function (err, doc) {
+            if (err) {
+                console.log("Error moving dish to dinner.", id)
+            } else {
+                console.log("Dish successfully moved to dinner.", doc);
             }
         });
     }
