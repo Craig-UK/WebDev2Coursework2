@@ -33,6 +33,7 @@
             </p>
         </div>
     </div>
+    {{#staff}}
     <div class="d-flex justify-content-md-center">
         <div class="col-md-1">
             <a class="btn btn-success" href="/dish/edit/{{_id}}">Edit {{name}}</a>
@@ -41,6 +42,7 @@
             <a class="btn btn-success" href="/dish/delete/{{_id}}">Delete {{name}}</a>
         </div>
     </div>
+    {{/staff}}
     {{/dishes}}
 </body>
 
