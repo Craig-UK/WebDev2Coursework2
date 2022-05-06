@@ -10,13 +10,16 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <form method="POST" action="/add" enctype="multipart/form-data">
+                <form method="POST" action="/add" enctype="multipart/form-data" class="needs-validation" novalidate>
                     <div class="mb-3">
                         <label for="name" class="formlabel">
                             Menu Item Name
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Menu Item Name">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Menu Item Name" required>
+                            <div class="invalid-feedback">
+                                Name is required.
+                            </div>
                         </div>
                     </div>
                     <div class="mb-3">
@@ -25,7 +28,10 @@
                         </label>
                         <div class="col-sm-10">
                             <input type="ingredients" class="form-control" id="ingredients" name="ingredients"
-                                placeholder="Menu Item Ingredients">
+                                placeholder="Menu Item Ingredients" required>
+                            <div class="invalid-feedback">
+                                Ingredients is required.
+                            </div>
                         </div>
                     </div>
                     <div class="mb-3">
@@ -34,7 +40,10 @@
                         </label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="description" name="description"
-                                placeholder="Menu Item Description">
+                                placeholder="Menu Item Description" required>
+                            <div class="invalid-feedback">
+                                Description is required.
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-10 mb-3">
@@ -55,7 +64,10 @@
                             Image of Menu Item
                         </label>
                         <input type="file" accept="image/jpeg" class="form-control" formenctype="multipart/form-data" id="formFileSm"
-                            name="image">
+                            name="image" required>
+                        <div class="invalid-feedback">
+                            Image is required.
+                        </div>
                     </div>
                     <div class="col-md-10 mb-3">
                         <label for="menu" class="formlabel">
@@ -83,7 +95,10 @@
                         </label>
                         <div class="col-sm-3">
                             <input type="text" class="form-control" id="price" name="price"
-                                placeholder="Menu Item Price">
+                                placeholder="Menu Item Price" required>
+                            <div class="invalid-feedback">
+                                Price is required.
+                            </div>
                         </div>
                     </div>
                     <div class="mb-3">

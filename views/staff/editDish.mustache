@@ -11,13 +11,16 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <form method="POST" action="/dish/edit/{{_id}}" enctype="multipart/form-data">
+                <form method="POST" action="/dish/edit/{{_id}}" enctype="multipart/form-data" class="needs-validation" novalidate>
                     <div class="mb-3">
                         <label for="name" class="formlabel">
                             Menu Item Name
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="name" name="name" placeholder="{{name}}" value="{{name}}">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="{{name}}" value="{{name}}" required>
+                            <div class="invalid-feedback">
+                                Name is required.
+                            </div>
                         </div>
                     </div>
                     <div class="mb-3">
@@ -26,7 +29,10 @@
                         </label>
                         <div class="col-sm-10">
                             <input type="ingredients" class="form-control" id="ingredients" name="ingredients"
-                                placeholder="{{ingredients}}" value="{{ingredients}}">
+                                placeholder="{{ingredients}}" value="{{ingredients}}" required>
+                            <div class="invalid-feedback">
+                                Ingredients is required.
+                            </div>
                         </div>
                     </div>
                     <div class="mb-3">
@@ -35,7 +41,10 @@
                         </label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="description" name="description"
-                                placeholder="{{description}}" value="{{description}}">
+                                placeholder="{{description}}" value="{{description}}" required>
+                            <div class="invalid-feedback">
+                                Description is required.
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-10 mb-3">
@@ -57,7 +66,10 @@
                         </label>
                         <input type="file" accept="image/jpeg" class="form-control" formenctype="multipart/form-data" id="formFileSm"
                             name="image" onchange="getFileNameWithExt(event)">
-                        <input readonly type="text" class="form-control" name="output" id="output" value="{{image}}">
+                        <input readonly type="text" class="form-control" name="output" id="output" value="{{image}}" required>
+                        <div class="invalid-feedback">
+                            Image is required.
+                        </div>
                     </div>
                     <div class="col-md-10 mb-3">
                         <label for="menu" class="formlabel">
@@ -85,7 +97,10 @@
                         </label>
                         <div class="col-sm-3">
                             <input type="text" class="form-control" id="price" name="price"
-                                placeholder="{{price}}" value="{{price}}">
+                                placeholder="{{price}}" value="{{price}}" required>
+                            <div class="invalid-feedback">
+                                Price is required.
+                            </div>
                         </div>
                     </div>
                     <div class="mb-3">
@@ -120,7 +135,7 @@
 
             output.value = fileName + "." + ext;
             extension.value = ext;
-        }
+        } // This function was coded with the help from this link:  https://stackoverflow.com/questions/43708127/javascript-get-the-filename-and-extension-from-input-type-file
 
         function changeCheckBox() {
             var checkBox = document.getElementById("chefSpecial");

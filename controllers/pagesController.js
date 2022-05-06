@@ -388,14 +388,14 @@ exports.post_new_dish = function (req, res) {
     console.log("Description: ", req.body.description)
     console.log("Chef Special?: ", chefSpecial)
 
-    if (!req.body.name || !req.body.ingredients || !req.body.allergyInfo || !req.body.dishType ||
-        !req.file || !req.body.menu || !req.body.price || !req.body.description) {
-        res.status(400).render("errors/400", {
-            title: "Error: 400",
-            content: "All fields are Required!"
-        });
-        return;
-    }
+    // if (!req.body.name || !req.body.ingredients || !req.body.allergyInfo || !req.body.dishType ||
+    //     !req.file || !req.body.menu || !req.body.price || !req.body.description) {
+    //     res.status(400).render("errors/400", {
+    //         title: "Error: 400",
+    //         content: "All fields are Required!"
+    //     });
+    //     return;
+    // }
 
     db.addNewDish(req.body.name, req.body.ingredients, req.body.allergyInfo, req.body.dishType, req.file.originalname,
                             req.body.menu, req.body.price, req.body.description, chefSpecial);
@@ -425,14 +425,14 @@ exports.post_edit_dish = function (req, res) {
     console.log("Description: ", req.body.description)
     console.log("Chef Special?: ", chefSpecial)
     
-    if (!req.body.name || !req.body.ingredients || !req.body.allergyInfo || !req.body.dishType ||
-        !req.body.output || !req.body.menu || !req.body.price || !req.body.description) {
-            res.status(400).render("errors/400", {
-                title: "Error: 400",
-                content: "All fields are Required!"
-            });
-        return;
-    }
+    // if (!req.body.name || !req.body.ingredients || !req.body.allergyInfo || !req.body.dishType ||
+    //     !req.body.output || !req.body.menu || !req.body.price || !req.body.description) {
+    //         res.status(400).render("errors/400", {
+    //             title: "Error: 400",
+    //             content: "All fields are Required!"
+    //         });
+    //     return;
+    // }
     
     if (req.file) {
         console.log("Image Detected! Uploading: ", req.file);
